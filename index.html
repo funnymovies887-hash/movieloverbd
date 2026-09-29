@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="monetag" content="77b743c7c13b13c81198d42eb1bd7054">
+    <script>
+      (function() {
+        try {
+          // Check if current page is the admin panel
+          var p = window.location.pathname.toLowerCase();
+          var h = window.location.hash.toLowerCase();
+          var s = window.location.search.toLowerCase();
+          var isAdmin = p.includes('/admin') || h.includes('admin') || s.includes('admin');
+          
+          // Only load Monetag ads for normal site visitors, never in admin panel
+          if (!isAdmin) {
+            var sc = document.createElement('script');
+            sc.src = "https://quge5.com/88/tag.min.js";
+            sc.setAttribute('data-zone', '282806');
+            sc.async = true;
+            sc.setAttribute('data-cfasync', 'false');
+            document.head.appendChild(sc);
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Lover - Download 300MB, 720p, 1080p, 4K Movies & Web Series</title>
+    <meta name="description" content="Movie Lover - Download 300MB, 720p, 1080p Bengali, Hindi Dubbed, Bollywood, and Hollywood Movies & Web Series with high-speed direct links." />
+    <meta property="og:title" content="Movie Lover - Download 300MB, 720p, 1080p, 4K Movies & Web Series" />
+    <meta property="og:description" content="Movie Lover - Download 300MB, 720p, 1080p Bengali, Hindi Dubbed, Bollywood, and Hollywood Movies & Web Series with high-speed direct links." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#0b0f19] text-gray-100 antialiased selection:bg-red-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

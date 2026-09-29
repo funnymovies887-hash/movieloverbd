@@ -1,0 +1,6 @@
+{
+  "name": "Movie Lover",
+  "description": "Download 300MB, 720p, 1080p, 4K Bengali, South Hindi Dubbed, Bollywood, and Hollywood Movies & Web Series with high-speed direct links.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
