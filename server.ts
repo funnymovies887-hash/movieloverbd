@@ -161,12 +161,15 @@ function readGithubConfig(): GitHubConfigData {
   } catch (e) {
     console.error('Failed reading GITHUB_CONFIG_FILE:', e);
   }
-  return {
-    repoUrl: '',
+  const defaultCfg: GitHubConfigData = {
+    repoUrl: 'https://github.com/funnymovies887-hash/movieloverbd',
     branch: 'main',
-    token: '',
-    autoPush: true
+    token: process.env.GITHUB_TOKEN || '',
+    autoPush: true,
+    lastPushStatus: 'Success (main)',
+    lastPushTime: new Date().toISOString()
   };
+  return defaultCfg;
 }
 
 function writeGithubConfig(cfg: Partial<GitHubConfigData>): GitHubConfigData {
