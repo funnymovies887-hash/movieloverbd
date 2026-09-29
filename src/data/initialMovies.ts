@@ -2,6 +2,180 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "gjnfgjjjg",
+    "originalTitle": "",
+    "slug": "gjnfgjjjg",
+    "category": "bengali",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p"
+    ],
+    "languages": [
+      "Bengali [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Actor 1",
+      "Actor 2"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "400 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Fast G-Drive Server",
+            "url": "https://hubcloud.club/drive/sample-480p",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://hubcloud.club/sample-480p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra",
+            "url": "https://hubcloud.club/drive/sample-720p",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://hubcloud.club/sample-720p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.5 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Cloud Server",
+            "url": "https://hubcloud.club/sample-1080p",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "isFeatured": false,
+    "isTrending": true,
+    "id": "movie-1790666917004",
+    "views": 4095,
+    "createdAt": "2026-09-29"
+  },
+  {
+    "title": "The Paradise",
+    "originalTitle": "",
+    "slug": "the-paradise",
+    "category": "bengali",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p"
+    ],
+    "languages": [
+      "Hindi [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Actor 1",
+      "Actor 2"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "400 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Fast G-Drive Server",
+            "url": "https://hubcloud.club/drive/sample-480p",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://hubcloud.club/sample-480p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra",
+            "url": "https://hubcloud.club/drive/sample-720p",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://hubcloud.club/sample-720p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.5 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Cloud Server",
+            "url": "https://hubcloud.club/sample-1080p",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "isFeatured": false,
+    "isTrending": true,
+    "id": "movie-1790587998583",
+    "views": 5222,
+    "createdAt": "2026-09-28"
+  },
+  {
     "id": "bengali-toofan-2024",
     "title": "Toofan (2024)",
     "originalTitle": "তুফান",
