@@ -2,6 +2,268 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "fgjktjnfgsbf9999999",
+    "originalTitle": "",
+    "slug": "fgjktjnfgsbf9999999",
+    "category": "bengali",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p"
+    ],
+    "languages": [
+      "Bengali [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Actor 1",
+      "Actor 2"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "400 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Fast G-Drive Server",
+            "url": "https://hubcloud.club/drive/sample-480p",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://hubcloud.club/sample-480p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra",
+            "url": "https://hubcloud.club/drive/sample-720p",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://hubcloud.club/sample-720p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.5 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Cloud Server",
+            "url": "https://hubcloud.club/sample-1080p",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "isFeatured": false,
+    "isTrending": true,
+    "id": "movie-1790693659431",
+    "views": 1647,
+    "createdAt": "2026-09-29"
+  },
+  {
+    "title": "gjnfgjjjg",
+    "originalTitle": "",
+    "slug": "gjnfgjjjg",
+    "category": "bengali",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p"
+    ],
+    "languages": [
+      "Bengali [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Actor 1",
+      "Actor 2"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "400 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Fast G-Drive Server",
+            "url": "https://hubcloud.club/drive/sample-480p",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://hubcloud.club/sample-480p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra",
+            "url": "https://hubcloud.club/drive/sample-720p",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://hubcloud.club/sample-720p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.5 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Cloud Server",
+            "url": "https://hubcloud.club/sample-1080p",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "isFeatured": false,
+    "isTrending": true,
+    "id": "movie-1790666917004",
+    "views": 4095,
+    "createdAt": "2026-09-29"
+  },
+  {
+    "title": "The Paradise",
+    "originalTitle": "",
+    "slug": "the-paradise",
+    "category": "bengali",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p"
+    ],
+    "languages": [
+      "Hindi [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Actor 1",
+      "Actor 2"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "400 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Fast G-Drive Server",
+            "url": "https://hubcloud.club/drive/sample-480p",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://hubcloud.club/sample-480p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra",
+            "url": "https://hubcloud.club/drive/sample-720p",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://hubcloud.club/sample-720p",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.5 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Cloud Server",
+            "url": "https://hubcloud.club/sample-1080p",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "isFeatured": false,
+    "isTrending": true,
+    "id": "movie-1790587998583",
+    "views": 5222,
+    "createdAt": "2026-09-28"
+  },
+  {
+    "id": "bengali-toofan-2024",
     "title": "Toofan (2024)",
     "originalTitle": "তুফান",
     "slug": "toofan-2024-bengali-movie",
@@ -15,7 +277,7 @@ export const INITIAL_MOVIES: Movie[] = [
       "4K UHD"
     ],
     "languages": [
-      "Hindi | Bengali [Original Audio]"
+      "Bengali [Original Audio]"
     ],
     "genres": [
       "Action",
@@ -23,8 +285,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Thriller",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/4yXFDR5N/MV5BZWY5Nm-Fh-Nz-At-ZDM0YS00Zjc4LTlj-MTQt-NWI4YWY3MTBj-Mjkz-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/4yXFDR5N/MV5BZWY5Nm-Fh-Nz-At-ZDM0YS00Zjc4LTlj-MTQt-NWI4YWY3MTBj-Mjkz-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 25m",
     "releaseDate": "17 June 2024 (Bangladesh & India)",
     "director": "Raihan Rafi",
@@ -116,14 +378,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/JItSQECXCIg?si=4nV8du6g_1Tc0dxs",
+    "streamUrl": "https://www.youtube.com/embed/Z1BCujX3pw8",
+    "views": 184200,
     "isFeatured": true,
     "isTrending": true,
-    "id": "bengali-toofan-2024",
-    "views": 184200,
     "createdAt": "2024-06-20"
   },
   {
+    "id": "bengali-hubba-2024",
     "title": "Hubba (2024)",
     "originalTitle": "হুব্বা",
     "slug": "hubba-2024-bengali-movie",
@@ -143,8 +405,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Biography",
       "Crime"
     ],
-    "posterUrl": "https://i.postimg.cc/zGHpPfr6/hubba-bengali-movie-review-t27p-CIUZM0o-p9ZNs-Yu2CBh-1400x1400.jpg",
-    "backdropUrl": "https://i.postimg.cc/zGHpPfr6/hubba-bengali-movie-review-t27p-CIUZM0o-p9ZNs-Yu2CBh-1400x1400.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 10m",
     "releaseDate": "19 January 2024",
     "director": "Bratya Basu",
@@ -207,14 +469,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/M9SC_ol-XBc?si=FJVpfqD8kSGBeEnt",
-    "isFeatured": true,
-    "isTrending": true,
-    "id": "bengali-hubba-2024",
+    "streamUrl": "https://www.youtube.com/embed/ScMzIvxBSi4",
     "views": 94300,
+    "isFeatured": false,
+    "isTrending": true,
     "createdAt": "2024-02-15"
   },
   {
+    "id": "bengali-hawa-2022",
     "title": "Hawa (2022)",
     "originalTitle": "হাওয়া",
     "slug": "hawa-2022-bengali-movie",
@@ -235,8 +497,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Drama",
       "Mythology"
     ],
-    "posterUrl": "https://i.postimg.cc/d04728xz/MV5BNGI5M2Mx-OGIt-MWNj-MS00Zm-Jk-LWE0Yzct-MDY3NTQ3Y2Qw-Mm-U0Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/d04728xz/MV5BNGI5M2Mx-OGIt-MWNj-MS00Zm-Jk-LWE0Yzct-MDY3NTQ3Y2Qw-Mm-U0Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 11m",
     "releaseDate": "29 July 2022",
     "director": "Mejbaur Rahman Sumon",
@@ -289,14 +551,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/f8r6qL6C7PY?feature=shared",
-    "isFeatured": true,
-    "isTrending": true,
-    "id": "bengali-hawa-2022",
+    "streamUrl": "https://www.youtube.com/embed/L_LUpnjgPso",
     "views": 132000,
+    "isFeatured": true,
+    "isTrending": false,
     "createdAt": "2023-01-10"
   },
   {
+    "id": "south-pushpa-2-2024",
     "title": "Pushpa 2: The Rule (2024)",
     "originalTitle": "Pushpa 2 - The Rule",
     "slug": "pushpa-2-the-rule-hindi-dubbed",
@@ -320,8 +582,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Drama",
       "Thriller"
     ],
-    "posterUrl": "https://i.postimg.cc/jjVnqxJP/9557465.jpg",
-    "backdropUrl": "https://i.postimg.cc/jjVnqxJP/9557465.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=1600&auto=format&fit=crop&q=80",
     "duration": "3h 15m",
     "releaseDate": "5 December 2024",
     "director": "Sukumar",
@@ -403,14 +665,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/O-sHcio7nAs?si=QTcfjcbJAHnLWCDt",
+    "streamUrl": "https://www.youtube.com/embed/1kVK0MZlbI4",
+    "views": 312000,
     "isFeatured": true,
     "isTrending": true,
-    "id": "south-pushpa-2-2024",
-    "views": 312000,
     "createdAt": "2024-12-06"
   },
   {
+    "id": "south-kalki-2898-ad-2024",
     "title": "Kalki 2898 AD (2024)",
     "originalTitle": "Kalki 2898 AD",
     "slug": "kalki-2898-ad-hindi-dubbed-full-movie",
@@ -433,8 +695,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Mythology",
       "Adventure"
     ],
-    "posterUrl": "https://i.postimg.cc/P5J0fhk8/MV5BMGRj-ZTQ0Yz-Ut-YWJj-MS00OGY1LTkw-Nj-Mt-Yj-Yw-Zm-Fm-NTY3MGZk-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/P5J0fhk8/MV5BMGRj-ZTQ0Yz-Ut-YWJj-MS00OGY1LTkw-Nj-Mt-Yj-Yw-Zm-Fm-NTY3MGZk-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80",
     "duration": "3h 01m",
     "releaseDate": "27 June 2024",
     "director": "Nag Ashwin",
@@ -488,14 +750,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/ed7DxXQgTKk?si=DMXGasZPZr6MWjGU",
+    "streamUrl": "https://www.youtube.com/embed/kQDd1AhGIHk",
+    "views": 265000,
     "isFeatured": true,
     "isTrending": true,
-    "id": "south-kalki-2898-ad-2024",
-    "views": 265000,
     "createdAt": "2024-07-02"
   },
   {
+    "id": "south-salaar-2023",
     "title": "Salaar: Part 1 – Ceasefire (2023)",
     "originalTitle": "Salaar",
     "slug": "salaar-part-1-ceasefire-hindi-dubbed",
@@ -518,8 +780,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Thriller",
       "Crime"
     ],
-    "posterUrl": "https://i.postimg.cc/90fYPmbR/MV5BYz-U2Mz-Zi-OTEt-ZTgw-OS00MTdl-LWJm-MDQt-Njdj-OGIx-YTA0NTYx-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/90fYPmbR/MV5BYz-U2Mz-Zi-OTEt-ZTgw-OS00MTdl-LWJm-MDQt-Njdj-OGIx-YTA0NTYx-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 55m",
     "releaseDate": "22 December 2023",
     "director": "Prashanth Neel",
@@ -573,14 +835,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/8oRVcsEL_Fc?si=gDlB1McdaweoZre7",
-    "isFeatured": true,
-    "isTrending": true,
-    "id": "south-salaar-2023",
+    "streamUrl": "https://www.youtube.com/embed/4GPvYMKtrtI",
     "views": 198000,
+    "isFeatured": false,
+    "isTrending": true,
     "createdAt": "2024-01-05"
   },
   {
+    "id": "south-leo-2023",
     "title": "Leo: Bloody Sweet (2023)",
     "originalTitle": "Leo",
     "slug": "leo-bloody-sweet-hindi-dubbed",
@@ -601,8 +863,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Thriller",
       "Crime"
     ],
-    "posterUrl": "https://i.postimg.cc/3NW24LrF/sddefault.jpg",
-    "backdropUrl": "https://i.postimg.cc/3NW24LrF/sddefault.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 44m",
     "releaseDate": "19 October 2023",
     "director": "Lokesh Kanagaraj",
@@ -656,14 +918,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/gQO18fHbEvc?si=V62o78oUxoKgRuS2",
-    "isFeatured": true,
-    "isTrending": false,
-    "id": "south-leo-2023",
+    "streamUrl": "https://www.youtube.com/embed/Po3jStA673E",
     "views": 175000,
+    "isFeatured": false,
+    "isTrending": false,
     "createdAt": "2023-11-01"
   },
   {
+    "id": "bollywood-stree-2-2024",
     "title": "Stree 2: Sarkate Ka Aatank (2024)",
     "originalTitle": "Stree 2",
     "slug": "stree-2-sarkate-ka-aatank-hindi-movie",
@@ -684,8 +946,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Horror",
       "Mystery"
     ],
-    "posterUrl": "https://i.postimg.cc/44MfR8cz/MV5BNWIz-Zj-Vm-N2Et-NGEy-My00Mz-Vl-LWIx-Mm-It-Zj-Yz-ZGVj-Mz-Q3N2Vk-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/44MfR8cz/MV5BNWIz-Zj-Vm-N2Et-NGEy-My00Mz-Vl-LWIx-Mm-It-Zj-Yz-ZGVj-Mz-Q3N2Vk-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 27m",
     "releaseDate": "15 August 2024",
     "director": "Amar Kaushik",
@@ -754,14 +1016,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/VlvOgk5BHS4?si=aZs26DG4O5IYLgX4",
-    "isFeatured": true,
-    "isTrending": false,
-    "id": "bollywood-stree-2-2024",
+    "streamUrl": "https://www.youtube.com/embed/KVnheS8-O84",
     "views": 280000,
+    "isFeatured": true,
+    "isTrending": true,
     "createdAt": "2024-08-20"
   },
   {
+    "id": "bollywood-bhool-bhulaiyaa-3-2024",
     "title": "Bhool Bhulaiyaa 3 (2024)",
     "originalTitle": "Bhool Bhulaiyaa 3",
     "slug": "bhool-bhulaiyaa-3-hindi-movie",
@@ -781,8 +1043,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Comedy",
       "Mystery"
     ],
-    "posterUrl": "https://i.postimg.cc/5yj2qTCC/MV5BMGFh-MDQ4Mz-Mt-MTUx-OC00NDE0LTkz-ZWMt-Mzhh-MGNi-MDlh-NDNm-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/5yj2qTCC/MV5BMGFh-MDQ4Mz-Mt-MTUx-OC00NDE0LTkz-ZWMt-Mzhh-MGNi-MDlh-NDNm-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 38m",
     "releaseDate": "1 November 2024",
     "director": "Anees Bazmee",
@@ -836,14 +1098,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/yPMC7oi7Icg?si=wPdCB3eQi8NyYFqF",
-    "isFeatured": true,
-    "isTrending": true,
-    "id": "bollywood-bhool-bhulaiyaa-3-2024",
+    "streamUrl": "https://www.youtube.com/embed/P2lE_24cE_g",
     "views": 210000,
+    "isFeatured": false,
+    "isTrending": true,
     "createdAt": "2024-11-05"
   },
   {
+    "id": "bollywood-jawan-2023",
     "title": "Jawan (2023)",
     "originalTitle": "Jawan",
     "slug": "jawan-hindi-movie-extended-cut",
@@ -866,8 +1128,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Thriller",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/fTtxMgr0/13870963.jpg",
-    "backdropUrl": "https://i.postimg.cc/fTtxMgr0/13870963.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 49m",
     "releaseDate": "7 September 2023",
     "director": "Atlee",
@@ -922,14 +1184,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/UzmgIeg7jNs?si=C1qawQUXzcgxLb0T",
-    "isFeatured": true,
-    "isTrending": true,
-    "id": "bollywood-jawan-2023",
+    "streamUrl": "https://www.youtube.com/embed/MWOlnZSnXWE",
     "views": 340000,
+    "isFeatured": false,
+    "isTrending": false,
     "createdAt": "2023-09-15"
   },
   {
+    "id": "bollywood-animal-2023",
     "title": "Animal (2023)",
     "originalTitle": "Animal",
     "slug": "animal-ranbir-kapoor-hindi-movie",
@@ -950,8 +1212,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Crime",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/MKNmR8Qx/MV5BZThm-NDg1Nj-Ut-NWJh-MC00Yj-A3LWJi-Mj-It-Nm-M4ZDQ5ZGZi-N2Y2Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/MKNmR8Qx/MV5BZThm-NDg1Nj-Ut-NWJh-MC00Yj-A3LWJi-Mj-It-Nm-M4ZDQ5ZGZi-N2Y2Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=1600&auto=format&fit=crop&q=80",
     "duration": "3h 21m",
     "releaseDate": "1 December 2023",
     "director": "Sandeep Reddy Vanga",
@@ -1005,14 +1267,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/8FkLRUJj-o0?si=zr1A5EWQFXDl6RdV",
-    "isFeatured": true,
-    "isTrending": true,
-    "id": "bollywood-animal-2023",
+    "streamUrl": "https://www.youtube.com/embed/Dydmpfo68DA",
     "views": 295000,
+    "isFeatured": false,
+    "isTrending": false,
     "createdAt": "2023-12-10"
   },
   {
+    "id": "hollywood-deadpool-wolverine-2024",
     "title": "Deadpool & Wolverine (2024)",
     "originalTitle": "Deadpool & Wolverine",
     "slug": "deadpool-wolverine-dual-audio-hindi-english",
@@ -1034,8 +1296,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Sci-Fi",
       "Superhero"
     ],
-    "posterUrl": "https://i.postimg.cc/cLJGKwfW/81IXDOFm-Y-L-AC-UF894-1000-QL80.jpg",
-    "backdropUrl": "https://i.postimg.cc/cLJGKwfW/81IXDOFm-Y-L-AC-UF894-1000-QL80.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 08m",
     "releaseDate": "26 July 2024",
     "director": "Shawn Levy",
@@ -1111,14 +1373,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/ea94nqoxnVQ?si=xUyGDY8TQDhmJ4KZ",
+    "streamUrl": "https://www.youtube.com/embed/73_1biulkYk",
+    "views": 360000,
     "isFeatured": true,
     "isTrending": true,
-    "id": "hollywood-deadpool-wolverine-2024",
-    "views": 360000,
     "createdAt": "2024-08-01"
   },
   {
+    "id": "hollywood-dune-2-2024",
     "title": "Dune: Part Two (2024)",
     "originalTitle": "Dune: Part Two",
     "slug": "dune-part-two-dual-audio-hindi-english",
@@ -1140,8 +1402,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Action",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/WpS9dK8r/81yn9k6Js-NL.jpg",
-    "backdropUrl": "https://i.postimg.cc/WpS9dK8r/81yn9k6Js-NL.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1600&auto=format&fit=crop&q=80",
     "duration": "2h 46m",
     "releaseDate": "1 March 2024",
     "director": "Denis Villeneuve",
@@ -1195,14 +1457,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/mDnQTWJ8l-Y?si=oOdVdeM7akvN6Jyr",
-    "isFeatured": true,
-    "isTrending": false,
-    "id": "hollywood-dune-2-2024",
+    "streamUrl": "https://www.youtube.com/embed/Way9Dexny3w",
     "views": 245000,
+    "isFeatured": false,
+    "isTrending": true,
     "createdAt": "2024-03-15"
   },
   {
+    "id": "hollywood-godzilla-kong-2024",
     "title": "Godzilla x Kong: The New Empire (2024)",
     "originalTitle": "Godzilla x Kong: The New Empire",
     "slug": "godzilla-x-kong-the-new-empire-dual-audio",
@@ -1222,8 +1484,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Sci-Fi",
       "Monster"
     ],
-    "posterUrl": "https://i.postimg.cc/2670FXft/Godzilla-x-Kong-The-New-Empire-4K-Ultra-HD-Digital-Copy-Warner-Bros-Action-Adventure-061f1a70-b09d-4.jpg",
-    "backdropUrl": "https://i.postimg.cc/2670FXft/Godzilla-x-Kong-The-New-Empire-4K-Ultra-HD-Digital-Copy-Warner-Bros-Action-Adventure-061f1a70-b09d-4.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80",
     "duration": "1h 55m",
     "releaseDate": "29 March 2024",
     "director": "Adam Wingard",
@@ -1275,14 +1537,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/8q-vHzk8w8M?si=2HQfKn2TgHWH5SNk",
-    "isFeatured": true,
-    "isTrending": false,
-    "id": "hollywood-godzilla-kong-2024",
+    "streamUrl": "https://www.youtube.com/embed/lV1OOlGwExg",
     "views": 190000,
+    "isFeatured": false,
+    "isTrending": false,
     "createdAt": "2024-04-10"
   },
   {
+    "id": "hollywood-oppenheimer-2023",
     "title": "Oppenheimer (2023)",
     "originalTitle": "Oppenheimer",
     "slug": "oppenheimer-dual-audio-hindi-english",
@@ -1303,8 +1565,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Drama",
       "History"
     ],
-    "posterUrl": "https://i.postimg.cc/hGq8ybMS/81QXIa9f-Fv-L-AC-UF894-1000-QL80.jpg",
-    "backdropUrl": "https://i.postimg.cc/hGq8ybMS/81QXIa9f-Fv-L-AC-UF894-1000-QL80.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1600&auto=format&fit=crop&q=80",
     "duration": "3h 00m",
     "releaseDate": "21 July 2023",
     "director": "Christopher Nolan",
@@ -1357,14 +1619,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/SdHe-JseJfQ?si=RkvkkT1JCPSV92og",
-    "isFeatured": true,
-    "isTrending": false,
-    "id": "hollywood-oppenheimer-2023",
+    "streamUrl": "https://www.youtube.com/embed/uYPbbksJxIg",
     "views": 275000,
+    "isFeatured": false,
+    "isTrending": false,
     "createdAt": "2023-11-20"
   },
   {
+    "id": "series-mirzapur-s3-2024",
     "title": "Mirzapur Season 3 (2024)",
     "originalTitle": "Mirzapur S03",
     "slug": "mirzapur-season-3-complete-web-series",
@@ -1385,8 +1647,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Drama",
       "Thriller"
     ],
-    "posterUrl": "https://i.postimg.cc/fTcR7c3x/Mirzapur-Season-3-Review-A-Political-Power-Play-with-a-Goosebump-Inducing-Finale.webp",
-    "backdropUrl": "https://i.postimg.cc/fTcR7c3x/Mirzapur-Season-3-Review-A-Political-Power-Play-with-a-Goosebump-Inducing-Finale.webp",
+    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=1600&auto=format&fit=crop&q=80",
     "duration": "Season 3 [10 Episodes Pack]",
     "releaseDate": "5 July 2024",
     "director": "Gurmmeet Singh, Anand Iyer",
@@ -1449,14 +1711,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/5vMWZhHPlaw?si=d8hlOviKH4wQ_XFU",
+    "streamUrl": "https://www.youtube.com/embed/sM67E2i2700",
+    "views": 310000,
     "isFeatured": true,
     "isTrending": true,
-    "id": "series-mirzapur-s3-2024",
-    "views": 310000,
     "createdAt": "2024-07-06"
   },
   {
+    "id": "series-panchayat-s3-2024",
     "title": "Panchayat Season 3 (2024)",
     "originalTitle": "Panchayat S03",
     "slug": "panchayat-season-3-complete-web-series",
@@ -1475,8 +1737,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Comedy",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/WbWfHKJv/season-3.jpg",
-    "backdropUrl": "https://i.postimg.cc/WbWfHKJv/season-3.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&auto=format&fit=crop&q=80",
     "duration": "Season 3 [8 Episodes]",
     "releaseDate": "28 May 2024",
     "director": "Deepak Kumar Mishra",
@@ -1529,14 +1791,14 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/AHMEtNAZTP4?si=arF1TmpArfrccixt",
-    "isFeatured": true,
-    "isTrending": false,
-    "id": "series-panchayat-s3-2024",
+    "streamUrl": "https://www.youtube.com/embed/9msr3b4Q9tM",
     "views": 220000,
+    "isFeatured": false,
+    "isTrending": true,
     "createdAt": "2024-05-30"
   },
   {
+    "id": "series-money-heist-all-seasons",
     "title": "Money Heist (All Seasons 1-5)",
     "originalTitle": "La Casa de Papel",
     "slug": "money-heist-complete-dual-audio-series",
@@ -1557,8 +1819,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Heist",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/pXFnw5mb/MV5BZDdk-N2Vj-NWUt-Mm-Fi-YS00Nzgw-LTkw-ZTIt-NTBi-Mj-Fl-NGFi-NTdh-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
-    "backdropUrl": "https://i.postimg.cc/pXFnw5mb/MV5BZDdk-N2Vj-NWUt-Mm-Fi-YS00Nzgw-LTkw-ZTIt-NTBi-Mj-Fl-NGFi-NTdh-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
+    "posterUrl": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format&fit=crop&q=80",
+    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
     "duration": "Seasons 1-5 [Complete Boxset]",
     "releaseDate": "Netflix Original",
     "director": "Álex Pina",
@@ -1611,11 +1873,10 @@ export const INITIAL_MOVIES: Movie[] = [
         ]
       }
     ],
-    "streamUrl": "https://youtu.be/85T6noHWhxM?si=4VTNnZE0UtQkk668",
-    "isFeatured": true,
-    "isTrending": false,
-    "id": "series-money-heist-all-seasons",
+    "streamUrl": "https://www.youtube.com/embed/_InqQJRqGW4",
     "views": 290000,
+    "isFeatured": false,
+    "isTrending": false,
     "createdAt": "2023-08-10"
   }
 ];
