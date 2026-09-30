@@ -35,11 +35,14 @@ export const HeroSpotlight: React.FC<HeroSpotlightProps> = ({ featuredMovies, on
   return (
     <div className="relative w-full overflow-hidden rounded-2xl border border-slate-800 shadow-2xl bg-slate-950 mb-6 group">
       {/* Background Backdrop with Gradient Overlays */}
-      <div className="relative h-[320px] sm:h-[400px] lg:h-[440px] w-full overflow-hidden">
+      <div className="relative h-[320px] sm:h-[400px] lg:h-[440px] w-full overflow-hidden bg-slate-900">
         <img
           src={current.backdropUrl || current.posterUrl}
           alt={current.title}
           className="w-full h-full object-cover object-center filter brightness-[0.45] transition-all duration-700 group-hover:scale-105"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           referrerPolicy="no-referrer"
         />
 

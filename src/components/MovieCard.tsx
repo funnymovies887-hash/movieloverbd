@@ -8,6 +8,7 @@ interface MovieCardProps {
 }
 
 export const MovieCard: React.FC<MovieCardProps> = ({ movie, onSelect }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   // Reliable fallback poster if external link fails
@@ -32,12 +33,24 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onSelect }) => {
     >
       {/* Poster Image Container */}
       <div className="relative aspect-[2/3] w-full overflow-hidden bg-slate-900">
+        {/* Shimmer skeleton while loading */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 animate-pulse" />
+        )}
+
         <img
           src={imageError ? fallbackPoster : movie.posterUrl}
           alt={movie.title}
-          onError={() => setImageError(true)}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          onLoad={() => setImageLoaded(true)}
+          onError={() => {
+            setImageError(true);
+            setImageLoaded(true);
+          }}
+          className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-500 ${
+            imageLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-95 blur-sm'
+          }`}
           loading="lazy"
+          decoding="async"
           referrerPolicy="no-referrer"
         />
 
