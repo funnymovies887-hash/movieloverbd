@@ -32,6 +32,16 @@ interface MovieDetailsViewProps {
 function formatYouTubeEmbedUrl(url: string): string {
   if (!url || !url.trim()) return '';
   const trimmed = url.trim();
+
+  // 1. Google Drive view link -> embeddable preview
+  if (trimmed.includes('drive.google.com/file/d/')) {
+    const gDriveMatch = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (gDriveMatch && gDriveMatch[1]) {
+      return `https://drive.google.com/file/d/${gDriveMatch[1]}/preview`;
+    }
+  }
+
+  // 2. YouTube links -> embed
   if (trimmed.includes('/embed/')) return trimmed;
   const shortMatch = trimmed.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
   if (shortMatch && shortMatch[1]) {
@@ -200,10 +210,10 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
             {movie.streamUrl && (
               <button
                 onClick={() => setShowVideoModal(true)}
-                className="w-full max-w-[280px] mt-3 py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-red-600/30 transition-transform active:scale-95 cursor-pointer"
+                className="w-full max-w-[280px] mt-3 py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-red-600/40 transition-transform active:scale-95 cursor-pointer ring-2 ring-red-500/50"
               >
                 <Play className="w-4 h-4 fill-white" />
-                <span>Watch Trailer / Stream Preview</span>
+                <span>Watch Online (ফুল মুভি দেখুন)</span>
               </button>
             )}
 
@@ -508,27 +518,55 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
         )}
       </div>
 
-      {/* Video Trailer / Preview Modal */}
+      {/* Video Stream / Watch Online Modal */}
       {showVideoModal && movie.streamUrl && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="w-full max-w-3xl bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+          <div className="w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
             <div className="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-              <h3 className="text-sm font-bold text-white">{movie.title} - Official Trailer / Preview</h3>
+              <div className="flex items-center gap-2">
+                <Play className="w-4 h-4 text-red-500 fill-red-500" />
+                <h3 className="text-sm font-bold text-white truncate max-w-md">
+                  {movie.title} - Watch Online (অনলাইনে দেখুন)
+                </h3>
+              </div>
               <button
                 onClick={() => setShowVideoModal(false)}
-                className="text-slate-400 hover:text-white px-2 py-1 rounded bg-slate-800 text-xs font-bold cursor-pointer"
+                className="text-slate-400 hover:text-white px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold cursor-pointer transition-colors"
               >
                 ✕ Close
               </button>
             </div>
-            <div className="aspect-video w-full bg-black">
-              <iframe
-                src={formatYouTubeEmbedUrl(movie.streamUrl)}
-                title={movie.title}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="aspect-video w-full bg-black relative flex items-center justify-center">
+              {movie.streamUrl.match(/\.(mp4|webm|ogg|m4v)(\?.*)?$/i) ? (
+                <video
+                  src={movie.streamUrl}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                >
+                  Your browser does not support HTML5 video player.
+                </video>
+              ) : (
+                <iframe
+                  src={formatYouTubeEmbedUrl(movie.streamUrl)}
+                  title={movie.title}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              )}
+            </div>
+            <div className="p-2.5 bg-slate-950 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+              <span>HD Video Player • High Speed Streaming</span>
+              <a
+                href={movie.streamUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-400 hover:underline flex items-center gap-1 font-semibold"
+              >
+                <span>Open in New Tab</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
           </div>
         </div>

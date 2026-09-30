@@ -120,6 +120,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
   // Master Movie Link Auto-Generator state
   const [masterMovieLink, setMasterMovieLink] = useState<string>('');
+  const [showModalVideoPreview, setShowModalVideoPreview] = useState<boolean>(false);
 
   const emptyMovieForm: Omit<Movie, 'id' | 'views' | 'createdAt'> = {
     title: '',
@@ -502,10 +503,20 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
   if (!isOpen) return null;
 
-  // Helper to format YouTube embed URLs automatically
+  // Helper to format YouTube and Google Drive embed URLs automatically
   function formatYouTubeEmbedUrl(url: string): string {
     if (!url || !url.trim()) return '';
     const trimmed = url.trim();
+
+    // 1. Google Drive view link -> embeddable preview
+    if (trimmed.includes('drive.google.com/file/d/')) {
+      const gDriveMatch = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (gDriveMatch && gDriveMatch[1]) {
+        return `https://drive.google.com/file/d/${gDriveMatch[1]}/preview`;
+      }
+    }
+
+    // 2. YouTube links -> embed
     if (trimmed.includes('/embed/')) return trimmed;
     const shortMatch = trimmed.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
     if (shortMatch && shortMatch[1]) {
@@ -2398,15 +2409,308 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 />
               </div>
 
-              <div>
-                <label className="block text-slate-300 font-bold mb-1">Trailer YouTube Embed URL</label>
-                <input
-                  type="url"
-                  placeholder="https://www.youtube.com/embed/..."
-                  value={movieForm.streamUrl}
-                  onChange={(e) => setMovieForm({ ...movieForm, streamUrl: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-2"
-                />
+              {/* 1. Full Movie Online Watch / Stream URL */}
+              <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-800/80 pb-2">
+                  <div className="flex items-center gap-2">
+                    <Film className="w-4 h-4 text-red-500" />
+                    <label className="text-slate-200 font-bold text-xs">
+                      Full Movie Watch Online / Stream URL (ফুল মুভি অনলাইনে দেখার ভিডিও লিংক)
+                    </label>
+                  </div>
+                  <span className="text-[10px] text-slate-400">
+                    YouTube / Google Drive Preview / HubCloud / MP4
+                  </span>
+                </div>
+                
+                <p className="text-[11px] text-slate-400 leading-relaxed">
+                  ব্যবহারকারীরা সাইটে অনলাইনে সরাসরি মুভি দেখতে পারবে। আপনি <strong className="text-slate-300">Google Drive Preview লিংক</strong>, <strong className="text-slate-300">YouTube Embed/Watch লিংক</strong>, সরাসরি <strong className="text-slate-300">.mp4/.mkv ভিডিও ফাইল লিংক</strong> অথবা <strong className="text-slate-300">HubCloud/Streamtape/Doodstream প্লেয়ার লিংক</strong> বসাতে পারেন।
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-2 items-center">
+                  <input
+                    type="url"
+                    placeholder="e.g. https://drive.google.com/file/d/XXX/preview অথবা https://youtu.be/... অথবা https://.../movie.mp4"
+                    value={movieForm.streamUrl}
+                    onChange={(e) => setMovieForm({ ...movieForm, streamUrl: e.target.value })}
+                    className="flex-1 w-full bg-slate-900 border border-slate-700 text-white rounded-lg px-3 py-2 text-xs focus:border-red-500 outline-none"
+                  />
+
+                  {/* Quick Google Drive /preview fixer */}
+                  {Boolean(movieForm.streamUrl && movieForm.streamUrl.includes('drive.google.com/file/d/') && !movieForm.streamUrl.includes('/preview')) && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const fixed = formatYouTubeEmbedUrl(movieForm.streamUrl || '');
+                        setMovieForm({ ...movieForm, streamUrl: fixed });
+                      }}
+                      className="px-3 py-2 bg-blue-600/30 hover:bg-blue-600/50 border border-blue-500/60 text-blue-300 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer transition-colors"
+                      title="Convert Google Drive link to /preview for embedded playback"
+                    >
+                      ⚡ ড্রাইভ প্রিভিউ লিংক করুন
+                    </button>
+                  )}
+
+                  {movieForm.streamUrl && (
+                    <button
+                      type="button"
+                      onClick={() => setShowModalVideoPreview(!showModalVideoPreview)}
+                      className="px-3 py-2 bg-red-600/30 hover:bg-red-600/50 border border-red-500/60 text-red-300 rounded-lg text-xs font-bold flex items-center gap-1.5 whitespace-nowrap cursor-pointer transition-colors"
+                    >
+                      <Play className="w-3.5 h-3.5 fill-red-400" />
+                      <span>{showModalVideoPreview ? 'প্রিভিউ বন্ধ করুন' : '▶ টেস্ট প্লেয়ার'}</span>
+                    </button>
+                  )}
+                </div>
+
+                {/* Inline Video Preview in Admin Modal */}
+                {showModalVideoPreview && movieForm.streamUrl && (
+                  <div className="mt-3 p-2 bg-black rounded-xl border border-red-500/40 space-y-1.5">
+                    <div className="flex items-center justify-between text-[11px] text-slate-300 px-1">
+                      <span className="font-semibold text-emerald-400 flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                        লাইভ ভিডিও প্লেয়ার প্রিভিউ
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setShowModalVideoPreview(false)}
+                        className="text-slate-400 hover:text-white text-[10px] cursor-pointer"
+                      >
+                        ✕ Close Preview
+                      </button>
+                    </div>
+                    <div className="aspect-video w-full rounded-lg overflow-hidden bg-slate-950 flex items-center justify-center">
+                      {movieForm.streamUrl.match(/\.(mp4|webm|ogg|m4v)(\?.*)?$/i) ? (
+                        <video
+                          src={movieForm.streamUrl}
+                          controls
+                          className="w-full h-full object-contain"
+                        >
+                          Video format not supported.
+                        </video>
+                      ) : (
+                        <iframe
+                          src={formatYouTubeEmbedUrl(movieForm.streamUrl)}
+                          title="Stream Preview"
+                          className="w-full h-full border-0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 2. Download Options & Qualities Section (480p, 720p, 1080p, 4K UHD) */}
+              <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-800/80 pb-2">
+                  <div className="flex items-center gap-2">
+                    <Download className="w-4 h-4 text-emerald-400" />
+                    <label className="text-slate-200 font-bold text-xs">
+                      Full Movie Download Options & Servers (ডাউনলোড লিংক ও কোয়ালিটি কনফিগ)
+                    </label>
+                  </div>
+                  <span className="text-[10px] text-emerald-400 font-bold">
+                    {movieForm.downloadOptions.length} টি কোয়ালিটি অপশন সক্রিয়
+                  </span>
+                </div>
+
+                {/* Helpful Tip regarding quality conversion vs separate links */}
+                <div className="bg-slate-900/90 border border-amber-800/50 rounded-lg p-2.5 text-[11px] text-amber-200/90 leading-relaxed flex items-start gap-2">
+                  <HelpCircle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-amber-300 font-bold">💡 কোয়ালিটি কনভার্ট নাকি আলাদা লিংক?</strong>
+                    <p className="mt-0.5 text-slate-300">
+                      ভিডিও ফাইল স্বয়ংক্রিয়ভাবে 480p, 720p, 1080p-তে কনভার্ট করতে বিশাল ভিডিও এনকোডিং সার্ভার লাগে। তাই সব জনপ্রিয় মুভি সাইট (যেমন VegaMovies, HubCloud) গুগল ড্রাইভ বা ক্লাউডে আগে থেকেই 480p, 720p, 1080p সাইজের ফাইল আপলোড করে আলাদা লিংক দিয়ে দেয়।
+                    </p>
+                    <p className="mt-1 text-emerald-300 font-medium">
+                      ⚡ আপনার কাজের সুবিধার জন্য নিচে <strong>"১-ক্লিকে ৪টি কোয়ালিটি জেনারেট"</strong> অপশন রয়েছে — শুধু ১টি ফাইল বা ড্রাইভ লিংক দিলেই সব কোয়ালিটি লিংক ও সাইজ এক সেকেন্ডে অটো-তৈরি হয়ে যাবে!
+                    </p>
+                  </div>
+                </div>
+
+                {/* 1-Click Master Link Auto Generator Box */}
+                <div className="bg-slate-900 border border-slate-700/80 rounded-xl p-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span>১-ক্লিকে ৪টি কোয়ালিটি লিংক অটো-জেনারেটর (Master Movie Link)</span>
+                    </span>
+                    <span className="text-[10px] text-slate-400">Google Drive / HubCloud / TeraBox / Mega</span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="url"
+                      placeholder="আপনার মূল ড্রাইভ/ক্লাউড লিংকটি এখানে পেস্ট করুন (যেমন: https://hubcloud.club/...)"
+                      value={masterMovieLink}
+                      onChange={(e) => setMasterMovieLink(e.target.value)}
+                      className="flex-1 bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-2 text-xs focus:border-emerald-500 outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAutoGenerateQualities}
+                      className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer shadow-md shadow-emerald-950 transition-all active:scale-95"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>⚡ ৪টি কোয়ালিটিতে অটো-সেট করুন</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Quality Cards List */}
+                <div className="space-y-3 pt-1">
+                  {movieForm.downloadOptions.map((opt, qIdx) => (
+                    <div
+                      key={qIdx}
+                      className="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl p-3 space-y-2.5 transition-colors"
+                    >
+                      {/* Quality Card Header */}
+                      <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded bg-red-600/30 border border-red-500/50 text-red-300 font-extrabold text-xs">
+                            {opt.quality || `Quality #${qIdx + 1}`}
+                          </span>
+                          <span className="text-[11px] text-slate-400 font-mono">
+                            {opt.size} • {opt.format}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveQuality(qIdx)}
+                          className="text-slate-500 hover:text-red-400 p-1 rounded hover:bg-slate-800 text-[11px] flex items-center gap-1 cursor-pointer transition-colors"
+                          title="Delete this quality option"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span>মুছে ফেলুন</span>
+                        </button>
+                      </div>
+
+                      {/* Quality Meta Row (Quality Name, Size, Format) */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div>
+                          <label className="block text-[10px] text-slate-400 font-semibold mb-0.5">
+                            Quality Name (e.g. 480p / 720p / 1080p / 4K)
+                          </label>
+                          <input
+                            type="text"
+                            value={opt.quality}
+                            onChange={(e) => handleQualityChange(qIdx, 'quality', e.target.value)}
+                            className="w-full bg-slate-950 border border-slate-700 text-white rounded-md px-2.5 py-1.5 text-xs font-bold"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] text-slate-400 font-semibold mb-0.5">
+                            File Size (e.g. 450 MB / 1.2 GB / 2.8 GB)
+                          </label>
+                          <input
+                            type="text"
+                            value={opt.size}
+                            onChange={(e) => handleQualityChange(qIdx, 'size', e.target.value)}
+                            className="w-full bg-slate-950 border border-slate-700 text-white rounded-md px-2.5 py-1.5 text-xs font-mono"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] text-slate-400 font-semibold mb-0.5">
+                            Format / Rip Type
+                          </label>
+                          <input
+                            type="text"
+                            value={opt.format}
+                            onChange={(e) => handleQualityChange(qIdx, 'format', e.target.value)}
+                            className="w-full bg-slate-950 border border-slate-700 text-white rounded-md px-2.5 py-1.5 text-xs"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Download Servers for this quality */}
+                      <div className="space-y-2 pt-1">
+                        <div className="flex items-center justify-between text-[11px] text-slate-300">
+                          <span className="font-semibold text-slate-300 flex items-center gap-1">
+                            <Server className="w-3 h-3 text-slate-400" />
+                            Download Servers ({opt.servers.length} টি সার্ভার লিংক):
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleAddServer(qIdx)}
+                            className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 cursor-pointer transition-colors"
+                          >
+                            <Plus className="w-3 h-3" />
+                            <span>+ সার্ভার লিংক যোগ করুন</span>
+                          </button>
+                        </div>
+
+                        {opt.servers.map((srv, sIdx) => (
+                          <div
+                            key={sIdx}
+                            className="flex flex-col sm:flex-row items-center gap-1.5 bg-slate-950/80 border border-slate-800/80 rounded-lg p-2"
+                          >
+                            <input
+                              type="text"
+                              placeholder="সার্ভারের নাম (যেমন: Google Drive Fast Server)"
+                              value={srv.name}
+                              onChange={(e) => handleServerChange(qIdx, sIdx, 'name', e.target.value)}
+                              className="w-full sm:w-1/3 bg-slate-900 border border-slate-700 text-white rounded px-2 py-1 text-xs"
+                            />
+
+                            <input
+                              type="url"
+                              placeholder="ডাউনলোড লিংক (https://...)"
+                              value={srv.url}
+                              onChange={(e) => handleServerChange(qIdx, sIdx, 'url', e.target.value)}
+                              className="w-full sm:flex-1 bg-slate-900 border border-slate-700 text-white rounded px-2 py-1 text-xs"
+                            />
+
+                            <select
+                              value={srv.type}
+                              onChange={(e) => handleServerChange(qIdx, sIdx, 'type', e.target.value)}
+                              className="w-full sm:w-28 bg-slate-900 border border-slate-700 text-white rounded px-2 py-1 text-xs"
+                            >
+                              <option value="gdrive">G-Drive</option>
+                              <option value="cloud">Cloud Mirror</option>
+                              <option value="direct">Direct Link</option>
+                              <option value="torrent">Torrent</option>
+                            </select>
+
+                            <div className="flex items-center gap-1 self-end sm:self-center">
+                              {srv.url && (
+                                <a
+                                  href={srv.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white"
+                                  title="Test URL in new tab"
+                                >
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                </a>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveServer(qIdx, sIdx)}
+                                className="p-1 rounded bg-slate-800 hover:bg-red-900/50 text-slate-400 hover:text-red-400 cursor-pointer"
+                                title="Delete Server"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={handleAddNewQualityOption}
+                    className="w-full py-2.5 rounded-xl border border-dashed border-slate-700 hover:border-emerald-500 text-slate-300 hover:text-emerald-400 text-xs font-bold flex items-center justify-center gap-1.5 bg-slate-900/50 hover:bg-slate-900 cursor-pointer transition-colors"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>+ নতুন আরেকটি কোয়ালিটি অপশন যোগ করুন (যেমন 4K UHD বা 2160p)</span>
+                  </button>
+                </div>
               </div>
 
               {/* Toggles */}
