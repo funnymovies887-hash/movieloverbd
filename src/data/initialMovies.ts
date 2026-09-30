@@ -15,14 +15,14 @@ export const INITIAL_MOVIES: Movie[] = [
       "4K UHD"
     ],
     "languages": [
-      "Hindi [Original Audio]"
+      "Hindi [Dual Audio]"
     ],
     "genres": [
       "Action",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/85Xzc89M/MV5BMWEy-NDM2Zm-Qt-Mm-Fk-Ni00MTQ1LTk1Mj-It-Mzdl-ZGJl-Ym-Iy-Yz-Zl-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg",
-    "backdropUrl": "https://i.postimg.cc/85Xzc89M/MV5BMWEy-NDM2Zm-Qt-Mm-Fk-Ni00MTQ1LTk1Mj-It-Mzdl-ZGJl-Ym-Iy-Yz-Zl-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg",
+    "posterUrl": "https://i.postimg.cc/sDVTyksy/XR1cm-Dz-OSA4-SD.jpg",
+    "backdropUrl": "https://i.postimg.cc/sDVTyksy/XR1cm-Dz-OSA4-SD.jpg",
     "duration": "3h 02m",
     "releaseDate": "2024",
     "director": "Director Name",
