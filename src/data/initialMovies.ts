@@ -194,8 +194,8 @@ export const INITIAL_MOVIES: Movie[] = [
       "Action",
       "Drama"
     ],
-    "posterUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80",
-    "backdropUrl": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "posterUrl": "https://i.postimg.cc/tTkVjkQv/The-Paradise-Poster-2c67d280-75d9-11f0-8df3-db01d1baa444.jpg",
+    "backdropUrl": "https://i.postimg.cc/tTkVjkQv/The-Paradise-Poster-2c67d280-75d9-11f0-8df3-db01d1baa444.jpg",
     "duration": "2h 15m",
     "releaseDate": "2024",
     "director": "Director Name",
