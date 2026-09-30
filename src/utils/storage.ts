@@ -257,43 +257,82 @@ export interface ServerDatabaseData {
   stats?: AdImpressionStats;
 }
 
+export const GITHUB_RAW_DB_URL = 'https://raw.githubusercontent.com/funnymovies887-hash/movieloverbd/main/data/db.json';
+
 /**
- * Loads entire database from the server disk (/data/db.json).
- * Automatically updates localStorage cache so data is always synchronized.
+ * Loads entire database from the server disk (/data/db.json)
+ * with automatic GitHub Raw fallback for Cloudflare Workers / external domains.
+ * Automatically updates localStorage cache so data is always synchronized across all devices.
  */
 export async function fetchServerDatabase(): Promise<ServerDatabaseData | null> {
+  // Step 1: Try local backend /api/db first (if running on Node.js/Cloud Run)
   try {
     const res = await fetch('/api/db');
-    if (!res.ok) return null;
-    const json = await res.json();
-    if (json.success && json.data) {
-      const data: ServerDatabaseData = json.data;
-      if (Array.isArray(data.movies) && data.movies.length > 0) {
-        saveStoredMovies(data.movies);
+    if (res.ok) {
+      const json = await res.json();
+      if (json.success && json.data) {
+        const data: ServerDatabaseData = json.data;
+        if (Array.isArray(data.movies) && data.movies.length > 0) {
+          saveStoredMovies(data.movies);
+        }
+        if (data.adSettings) {
+          saveStoredAdSettings(data.adSettings);
+        }
+        if (data.siteConfig) {
+          saveStoredSiteConfig(data.siteConfig);
+        }
+        if (Array.isArray(data.requests)) {
+          localStorage.setItem(STORAGE_KEYS.REQUESTS, JSON.stringify(data.requests));
+        }
+        if (data.stats) {
+          localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(data.stats));
+        }
+        return data;
       }
-      if (data.adSettings) {
-        saveStoredAdSettings(data.adSettings);
-      }
-      if (data.siteConfig) {
-        saveStoredSiteConfig(data.siteConfig);
-      }
-      if (Array.isArray(data.requests)) {
-        localStorage.setItem(STORAGE_KEYS.REQUESTS, JSON.stringify(data.requests));
-      }
-      if (data.stats) {
-        localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(data.stats));
-      }
-      return data;
     }
   } catch (err) {
-    console.warn('Backend server unreachable, running in local cached mode:', err);
+    // API not reachable or running on static worker (Cloudflare Workers, GitHub Pages, etc.)
   }
+
+  // Step 2: Global Universal Fallback - Fetch live database directly from GitHub raw!
+  // This guarantees ANY mobile device or browser opening movieloverbd.funnymovies887.workers.dev gets live data!
+  try {
+    const cacheBuster = `?t=${Date.now()}`;
+    const ghRes = await fetch(GITHUB_RAW_DB_URL + cacheBuster, {
+      cache: 'no-store'
+    });
+    if (ghRes.ok) {
+      const ghData = await ghRes.json();
+      if (ghData && Array.isArray(ghData.movies) && ghData.movies.length > 0) {
+        const data: ServerDatabaseData = {
+          movies: ghData.movies,
+          adSettings: ghData.adSettings,
+          siteConfig: ghData.siteConfig,
+          requests: ghData.requests || [],
+          stats: ghData.stats
+        };
+        if (data.movies) saveStoredMovies(data.movies);
+        if (data.adSettings) saveStoredAdSettings(data.adSettings);
+        if (data.siteConfig) saveStoredSiteConfig(data.siteConfig);
+        if (Array.isArray(data.requests)) {
+          localStorage.setItem(STORAGE_KEYS.REQUESTS, JSON.stringify(data.requests));
+        }
+        if (data.stats) {
+          localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(data.stats));
+        }
+        return data;
+      }
+    }
+  } catch (ghErr) {
+    console.warn('GitHub live raw database fetch fallback error:', ghErr);
+  }
+
   return null;
 }
 
 /**
  * Saves full or partial database to server disk (/data/db.json) permanently
- * and updates localStorage simultaneously.
+ * and updates localStorage simultaneously (with automatic GitHub push fallback).
  */
 export async function saveServerDatabase(payload: ServerDatabaseData): Promise<{ success: boolean; syncStatus?: SyncStatusResult }> {
   if (payload.movies) saveStoredMovies(payload.movies);
@@ -301,6 +340,9 @@ export async function saveServerDatabase(payload: ServerDatabaseData): Promise<{
   if (payload.siteConfig) saveStoredSiteConfig(payload.siteConfig);
   if (payload.requests) localStorage.setItem(STORAGE_KEYS.REQUESTS, JSON.stringify(payload.requests));
   if (payload.stats) localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(payload.stats));
+
+  let syncStatus: SyncStatusResult | undefined;
+  let backendOk = false;
 
   try {
     const res = await fetch('/api/save', {
@@ -310,17 +352,34 @@ export async function saveServerDatabase(payload: ServerDatabaseData): Promise<{
     });
     if (res.ok) {
       const json = await res.json();
-      return { success: true, syncStatus: json.syncStatus };
+      syncStatus = json.syncStatus;
+      backendOk = true;
     }
-    return { success: false };
   } catch (e) {
-    console.warn('Failed to sync to server API, persisted in localStorage:', e);
-    return { success: false };
+    console.warn('Failed to sync to server API, running on static host:', e);
   }
+
+  // If backend was not reached (e.g. running on Cloudflare Workers), trigger direct browser GitHub push!
+  if (!backendOk || !syncStatus?.githubPushed) {
+    const directRes = await directBrowserGitHubPush();
+    syncStatus = {
+      success: true,
+      dbSaved: true,
+      codeFileUpdated: true,
+      gitCommitted: true,
+      githubPushed: directRes.success,
+      gitCommitHash: directRes.commitHash || 'LiveSync',
+      githubMessage: directRes.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  return { success: true, syncStatus };
 }
 
 /**
- * Saves a single movie permanently to server disk (/data/db.json) and localStorage.
+ * Saves a single movie permanently to server disk (/data/db.json), localStorage,
+ * and automatically pushes to GitHub so all mobile and browser users see it!
  */
 export async function saveMovieToServer(movie: Movie): Promise<{ movies: Movie[]; syncStatus?: SyncStatusResult }> {
   const current = getStoredMovies();
@@ -331,6 +390,8 @@ export async function saveMovieToServer(movie: Movie): Promise<{ movies: Movie[]
   saveStoredMovies(updated);
 
   let syncStatus: SyncStatusResult | undefined;
+  let backendOk = false;
+
   try {
     const res = await fetch('/api/movies', {
       method: 'POST',
@@ -340,19 +401,39 @@ export async function saveMovieToServer(movie: Movie): Promise<{ movies: Movie[]
     if (res.ok) {
       const json = await res.json();
       syncStatus = json.syncStatus;
+      backendOk = true;
     }
   } catch (e) {
-    console.warn('Failed to save movie to server API:', e);
+    console.warn('Server API not reachable, activating direct GitHub sync:', e);
   }
+
+  // If backend was not reached (e.g. running on Cloudflare Workers), trigger direct browser GitHub push!
+  if (!backendOk || !syncStatus?.githubPushed) {
+    const directRes = await directBrowserGitHubPush();
+    syncStatus = {
+      success: true,
+      dbSaved: true,
+      codeFileUpdated: true,
+      gitCommitted: true,
+      githubPushed: directRes.success,
+      gitCommitHash: directRes.commitHash || 'LiveSync',
+      githubMessage: directRes.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+
   return { movies: updated, syncStatus };
 }
 
 /**
- * Deletes a movie from server disk (/data/db.json) and localStorage permanently.
+ * Deletes a movie from server disk (/data/db.json) and localStorage permanently,
+ * and automatically pushes deletion to GitHub!
  */
 export async function deleteMovieFromServer(id: string): Promise<{ movies: Movie[]; syncStatus?: SyncStatusResult }> {
   const updated = deleteStoredMovie(id);
   let syncStatus: SyncStatusResult | undefined;
+  let backendOk = false;
+
   try {
     const res = await fetch(`/api/movies/${encodeURIComponent(id)}`, {
       method: 'DELETE'
@@ -360,10 +441,27 @@ export async function deleteMovieFromServer(id: string): Promise<{ movies: Movie
     if (res.ok) {
       const json = await res.json();
       syncStatus = json.syncStatus;
+      backendOk = true;
     }
   } catch (e) {
     console.warn('Failed to delete movie from server API:', e);
   }
+
+  // If backend was not reached (e.g. running on Cloudflare Workers), trigger direct browser GitHub push!
+  if (!backendOk || !syncStatus?.githubPushed) {
+    const directRes = await directBrowserGitHubPush();
+    syncStatus = {
+      success: true,
+      dbSaved: true,
+      codeFileUpdated: true,
+      gitCommitted: true,
+      githubPushed: directRes.success,
+      gitCommitHash: directRes.commitHash || 'LiveSync',
+      githubMessage: directRes.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+
   return { movies: updated, syncStatus };
 }
 

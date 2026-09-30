@@ -28,9 +28,32 @@ import {
   CheckCircle2,
   AlertCircle,
   Terminal,
-  ShieldCheck
+  ShieldCheck,
+  Download,
+  Link as LinkIcon,
+  Server,
+  FileVideo,
+  Layers,
+  Globe,
+  Radio,
+  Play,
+  CheckSquare,
+  Square,
+  Clock,
+  Trash
 } from 'lucide-react';
-import { Movie, AdSettings, SiteConfig, MovieRequest, AdImpressionStats, GitHubConfig, SyncStatusResult, GitRepoStatus } from '../types';
+import { 
+  Movie, 
+  AdSettings, 
+  SiteConfig, 
+  MovieRequest, 
+  AdImpressionStats, 
+  GitHubConfig, 
+  SyncStatusResult, 
+  GitRepoStatus,
+  MovieDownloadOption,
+  MovieServer 
+} from '../types';
 import { 
   addStoredMovie, 
   updateStoredMovie, 
@@ -79,7 +102,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   onRequestsUpdated,
   onOpenGuide
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem('movielover_admin_auth') === 'true';
+    } catch (e) {
+      return false;
+    }
+  });
   const [passwordInput, setPasswordInput] = useState<string>('');
   const [authError, setAuthError] = useState<string>('');
 
@@ -89,6 +118,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   const [isMovieModalOpen, setIsMovieModalOpen] = useState(false);
   const [editingMovieId, setEditingMovieId] = useState<string | null>(null);
 
+  // Master Movie Link Auto-Generator state
+  const [masterMovieLink, setMasterMovieLink] = useState<string>('');
+
   const emptyMovieForm: Omit<Movie, 'id' | 'views' | 'createdAt'> = {
     title: '',
     originalTitle: '',
@@ -96,7 +128,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     category: 'bengali',
     year: new Date().getFullYear(),
     rating: 8.0,
-    quality: ['480p', '720p', '1080p'],
+    quality: ['480p', '720p', '1080p', '4K UHD'],
     languages: ['Bengali [Original Audio]'],
     genres: ['Action', 'Drama'],
     posterUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80',
@@ -113,11 +145,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     downloadOptions: [
       {
         quality: '480p',
-        size: '400 MB',
+        size: '450 MB',
         format: 'MKV | x264 AAC',
         servers: [
-          { name: 'Fast G-Drive Server', url: 'https://hubcloud.club/drive/sample-480p', type: 'gdrive' },
-          { name: 'HubCloud Direct Link', url: 'https://hubcloud.club/sample-480p', type: 'cloud' }
+          { name: 'Fast G-Drive Server', url: '', type: 'gdrive' },
+          { name: 'HubCloud Direct Link', url: '', type: 'cloud' }
         ]
       },
       {
@@ -125,16 +157,25 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         size: '1.2 GB',
         format: 'MKV | 720p HD-Rip',
         servers: [
-          { name: 'Google Drive Ultra', url: 'https://hubcloud.club/drive/sample-720p', type: 'gdrive' },
-          { name: 'Direct Cloud Mirror', url: 'https://hubcloud.club/sample-720p', type: 'cloud' }
+          { name: 'Google Drive Ultra', url: '', type: 'gdrive' },
+          { name: 'Direct Cloud Mirror', url: '', type: 'cloud' }
         ]
       },
       {
         quality: '1080p',
-        size: '2.5 GB',
+        size: '2.8 GB',
         format: 'MKV | 1080p Full HD ESub',
         servers: [
-          { name: 'VIP Cloud Server', url: 'https://hubcloud.club/sample-1080p', type: 'cloud' }
+          { name: 'VIP Cloud Server', url: '', type: 'cloud' },
+          { name: 'Direct High-Speed Link', url: '', type: 'direct' }
+        ]
+      },
+      {
+        quality: '4K UHD',
+        size: '6.5 GB',
+        format: 'MKV | 4K UHD HDR',
+        servers: [
+          { name: 'Ultra 4K Fast Server', url: '', type: 'cloud' }
         ]
       }
     ],
@@ -148,6 +189,140 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   const [formGenresStr, setFormGenresStr] = useState('Action, Drama');
   const [formCastStr, setFormCastStr] = useState('Actor 1, Actor 2');
   const [formScreenshotsStr, setFormScreenshotsStr] = useState('');
+
+  // Auto-generate 480p, 720p, 1080p, and 4K UHD download servers from 1 Master Movie Link
+  const handleAutoGenerateQualities = () => {
+    if (!masterMovieLink.trim()) {
+      alert('দয়া করে আপনার মাস্টার মুভি ড্রাইভ বা ফাইল লিংকটি দিন (যেমন: Google Drive, HubCloud, TeraBox, Mega)');
+      return;
+    }
+    const cleanUrl = masterMovieLink.trim();
+    const generated: MovieDownloadOption[] = [
+      {
+        quality: '480p',
+        size: '450 MB',
+        format: 'MKV | x264 AAC',
+        servers: [
+          { name: 'Google Drive Fast Server', url: cleanUrl, type: 'gdrive' },
+          { name: 'HubCloud Direct Link', url: cleanUrl, type: 'cloud' }
+        ]
+      },
+      {
+        quality: '720p',
+        size: '1.2 GB',
+        format: 'MKV | 720p HD-Rip',
+        servers: [
+          { name: 'Google Drive Ultra HD', url: cleanUrl, type: 'gdrive' },
+          { name: 'Direct Cloud Mirror', url: cleanUrl, type: 'cloud' }
+        ]
+      },
+      {
+        quality: '1080p',
+        size: '2.8 GB',
+        format: 'MKV | 1080p Full HD ESub',
+        servers: [
+          { name: 'VIP Direct Cloud Server', url: cleanUrl, type: 'cloud' },
+          { name: 'High-Speed Fast Link', url: cleanUrl, type: 'direct' }
+        ]
+      },
+      {
+        quality: '4K UHD',
+        size: '6.5 GB',
+        format: 'MKV | 4K UHD HDR',
+        servers: [
+          { name: 'Ultra 4K Fast Server', url: cleanUrl, type: 'cloud' }
+        ]
+      }
+    ];
+
+    setMovieForm(prev => ({
+      ...prev,
+      quality: ['480p', '720p', '1080p', '4K UHD'],
+      downloadOptions: generated
+    }));
+
+    showSaveToast(
+      '⚡ ৪টি কোয়ালিটি লিংক সফলভাবে তৈরি হয়েছে!',
+      '480p, 720p, 1080p ও 4K UHD কোয়ালিটি ড্রাইভ লিংকের সাথে পূরণ করা হয়েছে। প্রয়োজনে নিচে আলাদা সাইজ বা লিংক এডিট করতে পারেন।',
+      'success'
+    );
+  };
+
+  const handleAddServer = (qIdx: number) => {
+    setMovieForm(prev => {
+      const options = [...prev.downloadOptions];
+      if (options[qIdx]) {
+        options[qIdx] = {
+          ...options[qIdx],
+          servers: [
+            ...options[qIdx].servers,
+            { name: 'Direct Cloud Mirror', url: masterMovieLink || '', type: 'cloud' }
+          ]
+        };
+      }
+      return { ...prev, downloadOptions: options };
+    });
+  };
+
+  const handleRemoveServer = (qIdx: number, sIdx: number) => {
+    setMovieForm(prev => {
+      const options = [...prev.downloadOptions];
+      if (options[qIdx]) {
+        options[qIdx] = {
+          ...options[qIdx],
+          servers: options[qIdx].servers.filter((_, idx) => idx !== sIdx)
+        };
+      }
+      return { ...prev, downloadOptions: options };
+    });
+  };
+
+  const handleServerChange = (qIdx: number, sIdx: number, field: 'name' | 'url' | 'type', value: string) => {
+    setMovieForm(prev => {
+      const options = [...prev.downloadOptions];
+      if (options[qIdx] && options[qIdx].servers[sIdx]) {
+        const servers = [...options[qIdx].servers];
+        servers[sIdx] = { ...servers[sIdx], [field]: value };
+        options[qIdx] = { ...options[qIdx], servers };
+      }
+      return { ...prev, downloadOptions: options };
+    });
+  };
+
+  const handleQualityChange = (qIdx: number, field: 'quality' | 'size' | 'format', value: string) => {
+    setMovieForm(prev => {
+      const options = [...prev.downloadOptions];
+      if (options[qIdx]) {
+        options[qIdx] = { ...options[qIdx], [field]: value };
+      }
+      const updatedQualities = options.map(o => o.quality).filter(Boolean);
+      return { ...prev, downloadOptions: options, quality: updatedQualities };
+    });
+  };
+
+  const handleRemoveQuality = (qIdx: number) => {
+    setMovieForm(prev => {
+      const options = prev.downloadOptions.filter((_, idx) => idx !== qIdx);
+      const updatedQualities = options.map(o => o.quality).filter(Boolean);
+      return { ...prev, downloadOptions: options, quality: updatedQualities };
+    });
+  };
+
+  const handleAddNewQualityOption = () => {
+    const newQuality: MovieDownloadOption = {
+      quality: '4K UHD',
+      size: '6.5 GB',
+      format: 'MKV | 4K UHD HDR',
+      servers: [
+        { name: 'Ultra 4K Fast Server', url: masterMovieLink || '', type: 'cloud' }
+      ]
+    };
+    setMovieForm(prev => {
+      const options = [...prev.downloadOptions, newQuality];
+      const updatedQualities = options.map(o => o.quality).filter(Boolean);
+      return { ...prev, downloadOptions: options, quality: updatedQualities };
+    });
+  };
 
   // Ad Settings Form State
   const [adsForm, setAdsForm] = useState<AdSettings>(adSettings);
@@ -327,11 +502,44 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
   if (!isOpen) return null;
 
+  // Helper to format YouTube embed URLs automatically
+  function formatYouTubeEmbedUrl(url: string): string {
+    if (!url || !url.trim()) return '';
+    const trimmed = url.trim();
+    if (trimmed.includes('/embed/')) return trimmed;
+    const shortMatch = trimmed.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+    if (shortMatch && shortMatch[1]) {
+      return `https://www.youtube.com/embed/${shortMatch[1]}`;
+    }
+    const watchMatch = trimmed.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+    if (watchMatch && watchMatch[1]) {
+      return `https://www.youtube.com/embed/${watchMatch[1]}`;
+    }
+    return trimmed;
+  }
+
+  const handleBackToSite = () => {
+    window.history.pushState(null, '', '/');
+    onClose();
+  };
+
+  const handleLogout = () => {
+    try {
+      sessionStorage.removeItem('movielover_admin_auth');
+    } catch (e) {}
+    setIsAuthenticated(false);
+    window.history.pushState(null, '', '/');
+    onClose();
+  };
+
   // 1. Password Verification Screen
   if (!isAuthenticated) {
     const handleLogin = (e: React.FormEvent) => {
       e.preventDefault();
       if (passwordInput === siteConfig.adminPassword || passwordInput === 'Aa123456@') {
+        try {
+          sessionStorage.setItem('movielover_admin_auth', 'true');
+        } catch (e) {}
         setIsAuthenticated(true);
         setAuthError('');
       } else {
@@ -344,7 +552,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         {/* Top return link */}
         <div className="w-full max-w-md mb-4 flex items-center justify-between">
           <button
-            onClick={onClose}
+            onClick={handleBackToSite}
             className="text-xs text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -407,11 +615,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     setFormGenresStr('Action, Drama');
     setFormCastStr('Actor 1, Actor 2');
     setFormScreenshotsStr('');
+    setMasterMovieLink('');
     setIsMovieModalOpen(true);
   };
 
   const handleOpenEditMovie = (movie: Movie) => {
     setEditingMovieId(movie.id);
+    const existingDl = Array.isArray(movie.downloadOptions) && movie.downloadOptions.length > 0
+      ? movie.downloadOptions
+      : emptyMovieForm.downloadOptions;
+
     setMovieForm({
       title: movie.title,
       originalTitle: movie.originalTitle || '',
@@ -430,7 +643,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
       cast: movie.cast,
       synopsis: movie.synopsis,
       screenshots: movie.screenshots,
-      downloadOptions: movie.downloadOptions,
+      downloadOptions: existingDl,
       streamUrl: movie.streamUrl || '',
       isFeatured: movie.isFeatured || false,
       isTrending: movie.isTrending || false
@@ -439,6 +652,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     setFormGenresStr(movie.genres.join(', '));
     setFormCastStr(movie.cast.join(', '));
     setFormScreenshotsStr(movie.screenshots.join('\n'));
+    const initialLink = existingDl[0]?.servers[0]?.url || '';
+    setMasterMovieLink(initialLink);
     setIsMovieModalOpen(true);
   };
 
@@ -457,6 +672,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     const savedTitle = movieForm.title.trim();
     const isEdit = !!editingMovieId;
 
+    const savedQualities = Array.isArray(movieForm.downloadOptions) && movieForm.downloadOptions.length > 0
+      ? movieForm.downloadOptions.map(d => d.quality).filter(Boolean)
+      : (movieForm.quality.length ? movieForm.quality : ['480p', '720p', '1080p']);
+
     let targetMovie: Movie;
     if (editingMovieId) {
       // Edit existing
@@ -465,6 +684,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         ...movieForm,
         title: savedTitle,
         id: editingMovieId,
+        quality: savedQualities,
+        streamUrl: formatYouTubeEmbedUrl(movieForm.streamUrl || ''),
+        downloadOptions: movieForm.downloadOptions,
         languages: languages.length ? languages : ['Dual Audio'],
         genres: genres.length ? genres : ['Action'],
         cast: cast.length ? cast : ['Unknown'],
@@ -479,6 +701,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         title: savedTitle,
         id: `movie-${Date.now()}`,
         slug: savedTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        quality: savedQualities,
+        streamUrl: formatYouTubeEmbedUrl(movieForm.streamUrl || ''),
+        downloadOptions: movieForm.downloadOptions,
         languages: languages.length ? languages : ['Dual Audio'],
         genres: genres.length ? genres : ['Action'],
         cast: cast.length ? cast : ['Unknown'],
@@ -724,8 +949,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
   const handleResetToDefault = async () => {
     if (confirm('আপনি কি ডিফল্ট মুভি লাইব্রেরি (১৮+ মুভি) রিস্টোর করতে চান?')) {
-      const def = await resetMoviesOnServer();
-      onMoviesUpdated(def);
+      const res = await resetMoviesOnServer();
+      onMoviesUpdated(res.movies);
       showSaveToast('✅ ডিফল্ট মুভি লাইব্রেরি রিস্টোর ও সেভ হয়েছে!', '১৮+ প্রিমিয়াম মুভি সফলভাবে সার্ভার ডাটাবেজ ও ব্রাউজারে সেভ হয়েছে।', 'success');
     }
   };

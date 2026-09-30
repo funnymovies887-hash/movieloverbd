@@ -82,6 +82,7 @@ export interface GitHubConfig {
   repoUrl: string; // e.g. "funnymovies887/movielover" or "https://github.com/..."
   branch: string;  // e.g. "main"
   token: string;   // GitHub PAT token
+  tokenMasked?: string;
   autoPush: boolean;
   hasToken?: boolean;
   lastPushStatus?: string;

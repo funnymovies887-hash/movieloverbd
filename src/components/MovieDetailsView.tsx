@@ -29,6 +29,21 @@ interface MovieDetailsViewProps {
   onOpenGuide: () => void;
 }
 
+function formatYouTubeEmbedUrl(url: string): string {
+  if (!url || !url.trim()) return '';
+  const trimmed = url.trim();
+  if (trimmed.includes('/embed/')) return trimmed;
+  const shortMatch = trimmed.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+  if (shortMatch && shortMatch[1]) {
+    return `https://www.youtube.com/embed/${shortMatch[1]}`;
+  }
+  const watchMatch = trimmed.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  if (watchMatch && watchMatch[1]) {
+    return `https://www.youtube.com/embed/${watchMatch[1]}`;
+  }
+  return trimmed;
+}
+
 export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
   movie,
   onBack,
@@ -508,7 +523,7 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
             </div>
             <div className="aspect-video w-full bg-black">
               <iframe
-                src={movie.streamUrl}
+                src={formatYouTubeEmbedUrl(movie.streamUrl)}
                 title={movie.title}
                 className="w-full h-full border-0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

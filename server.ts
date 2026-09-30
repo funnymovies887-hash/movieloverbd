@@ -405,7 +405,7 @@ app.all('/api/reset-movies', async (_req, res) => {
 app.all('/api/sync-all', async (req, res) => {
   const reason = (req.body && req.body.reason) || (req.query && req.query.reason) || 'User 1-Click Sync';
   const syncResult = await performUniversalSync(reason);
-  res.json({ success: true, ...syncResult });
+  res.json({ ...syncResult });
 });
 
 // 8. Add request
