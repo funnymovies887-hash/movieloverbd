@@ -57,7 +57,6 @@ if (!fs.existsSync(DATA_DIR)) {
 let memoryDb: any = null;
 
 function readDb() {
-  if (memoryDb) return memoryDb;
   try {
     if (fs.existsSync(DB_FILE)) {
       const data = fs.readFileSync(DB_FILE, 'utf-8');
@@ -69,6 +68,7 @@ function readDb() {
   } catch (e) {
     console.error('Failed reading DB_FILE:', e);
   }
+  if (memoryDb) return memoryDb;
 
   // Fallback defaults
   memoryDb = {

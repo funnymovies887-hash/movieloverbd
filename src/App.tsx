@@ -21,15 +21,80 @@ import { RequestMovieModal } from './components/RequestMovieModal';
 import { Footer } from './components/Footer';
 import { Film, DollarSign, Sparkles, Send, Flame, HelpCircle } from 'lucide-react';
 
+// Helper to parse URL into application route state
+function parseCurrentUrl(allMovies: Movie[]) {
+  const path = window.location.pathname;
+  const hash = window.location.hash;
+  const search = window.location.search;
+
+  // 1. Admin route
+  const lowerPath = path.toLowerCase();
+  const lowerHash = hash.toLowerCase();
+  const lowerSearch = search.toLowerCase();
+  const isAdmin = (
+    lowerPath === '/admin' ||
+    lowerPath === '/admin/' ||
+    lowerPath.startsWith('/admin') ||
+    lowerHash === '#admin' ||
+    lowerHash === '#/admin' ||
+    lowerHash.includes('admin') ||
+    lowerSearch.includes('admin=true') ||
+    lowerSearch.includes('page=admin')
+  );
+
+  // 2. Movie route (/movie/:slug, #/movie/:slug, ?movie=:slug)
+  let movieSlug: string | null = null;
+  const pathMatch = path.match(/^\/movie\/([^\/\?#]+)/i);
+  const hashMatch = hash.match(/^#\/?movie\/([^\/\?#]+)/i);
+  const searchParams = new URLSearchParams(search);
+  const queryMovie = searchParams.get('movie');
+
+  if (pathMatch) {
+    movieSlug = decodeURIComponent(pathMatch[1]);
+  } else if (hashMatch) {
+    movieSlug = decodeURIComponent(hashMatch[1]);
+  } else if (queryMovie) {
+    movieSlug = decodeURIComponent(queryMovie);
+  }
+
+  // 3. Category route (/category/:category, #/category/:category, ?category=:category)
+  let category: string = 'all';
+  const pathCatMatch = path.match(/^\/category\/([^\/\?#]+)/i);
+  const hashCatMatch = hash.match(/^#\/?category\/([^\/\?#]+)/i);
+  const queryCat = searchParams.get('category');
+
+  if (pathCatMatch) {
+    category = decodeURIComponent(pathCatMatch[1]);
+  } else if (hashCatMatch) {
+    category = decodeURIComponent(hashCatMatch[1]);
+  } else if (queryCat) {
+    category = decodeURIComponent(queryCat);
+  }
+
+  let matchedMovie: Movie | null = null;
+  if (movieSlug && Array.isArray(allMovies)) {
+    matchedMovie = allMovies.find(m => m.slug === movieSlug || m.id === movieSlug) || null;
+  }
+
+  return {
+    isAdmin,
+    movieSlug,
+    matchedMovie,
+    category
+  };
+}
+
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>(() => getStoredMovies());
   const [adSettings, setAdSettings] = useState<AdSettings>(() => getStoredAdSettings());
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => getStoredSiteConfig());
   const [requests, setRequests] = useState<MovieRequest[]>(() => getStoredRequests());
 
-  // Navigation State
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  const [currentCategory, setCurrentCategory] = useState<string>('all');
+  // Parse initial route from URL synchronously on first render so refresh never loses position
+  const initialRoute = React.useMemo(() => parseCurrentUrl(getStoredMovies()), []);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(() => initialRoute.matchedMovie);
+  const [currentCategory, setCurrentCategory] = useState<string>(() => initialRoute.category);
+  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(() => initialRoute.isAdmin);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Filters & Sorting
@@ -39,7 +104,6 @@ export default function App() {
   const [sortBy, setSortBy] = useState<'latest' | 'rating' | 'views'>('latest');
 
   // Modals
-  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
   const [isGuideOpen, setIsGuideOpen] = useState<boolean>(false);
   const [isRequestOpen, setIsRequestOpen] = useState<boolean>(false);
 
@@ -63,6 +127,11 @@ export default function App() {
       if (!isMounted || !serverData) return;
       if (Array.isArray(serverData.movies) && serverData.movies.length > 0) {
         setMovies(serverData.movies);
+        // If current URL contains a movie slug, sync state with the latest movie record
+        const route = parseCurrentUrl(serverData.movies);
+        if (route.matchedMovie) {
+          setSelectedMovie(route.matchedMovie);
+        }
       }
       if (serverData.adSettings) {
         setAdSettings(serverData.adSettings);
@@ -80,29 +149,23 @@ export default function App() {
     };
   }, []);
 
-  // Dedicated Separate Admin Panel URL Routing (/admin, #admin, ?admin=true)
+  // Listen to browser Back/Forward navigation & URL changes
   useEffect(() => {
     const handleUrlRouting = () => {
-      const path = window.location.pathname.toLowerCase();
-      const hash = window.location.hash.toLowerCase();
-      const search = window.location.search.toLowerCase();
-      if (
-        path === '/admin' ||
-        path === '/admin/' ||
-        path.startsWith('/admin') ||
-        hash === '#admin' ||
-        hash === '#/admin' ||
-        hash.includes('admin') ||
-        search.includes('admin=true') ||
-        search.includes('page=admin')
-      ) {
-        setIsAdminOpen(true);
-      } else {
-        setIsAdminOpen(false);
+      const route = parseCurrentUrl(movies.length ? movies : getStoredMovies());
+      setIsAdminOpen(route.isAdmin);
+      if (route.matchedMovie) {
+        setSelectedMovie(route.matchedMovie);
+        document.title = `${route.matchedMovie.title} - ${siteConfig.siteName}`;
+      } else if (!route.movieSlug) {
+        setSelectedMovie(null);
+        document.title = `${siteConfig.siteName} - ${siteConfig.tagline}`;
+      }
+      if (route.category) {
+        setCurrentCategory(route.category);
       }
     };
 
-    handleUrlRouting();
     window.addEventListener('hashchange', handleUrlRouting);
     window.addEventListener('popstate', handleUrlRouting);
 
@@ -110,15 +173,20 @@ export default function App() {
       window.removeEventListener('hashchange', handleUrlRouting);
       window.removeEventListener('popstate', handleUrlRouting);
     };
-  }, []);
+  }, [movies, siteConfig.siteName, siteConfig.tagline]);
 
   const handleOpenAdmin = () => {
-    // Navigate cleanly so any ad scripts and click listeners are completely removed
-    window.location.href = '/admin';
+    if (window.location.pathname !== '/admin') {
+      window.history.pushState({ type: 'admin' }, '', '/admin');
+    }
+    setIsAdminOpen(true);
   };
 
   const handleCloseAdmin = () => {
-    window.location.href = '/';
+    if (window.location.pathname === '/admin') {
+      window.history.pushState(null, '', '/');
+    }
+    setIsAdminOpen(false);
   };
 
   // If in Admin Mode, render the dedicated separate Admin Dashboard Page!
@@ -195,11 +263,34 @@ export default function App() {
 
   const handleSelectMovie = (movie: Movie) => {
     setSelectedMovie(movie);
+    const targetPath = `/movie/${movie.slug}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ type: 'movie', slug: movie.slug }, '', targetPath);
+    }
+    document.title = `${movie.title} - ${siteConfig.siteName}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToHome = () => {
     setSelectedMovie(null);
+    const targetPath = currentCategory && currentCategory !== 'all' ? `/category/${currentCategory}` : '/';
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+    }
+    document.title = `${siteConfig.siteName} - ${siteConfig.tagline}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectCategory = (cat: string) => {
+    setCurrentCategory(cat);
+    setSelectedMovie(null);
+    const targetPath = cat !== 'all' ? `/category/${cat}` : '/';
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ type: 'category', category: cat }, '', targetPath);
+    }
+    document.title = cat !== 'all'
+      ? `${cat.toUpperCase()} Movies - ${siteConfig.siteName}`
+      : `${siteConfig.siteName} - ${siteConfig.tagline}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -213,15 +304,12 @@ export default function App() {
       {/* Main Navbar */}
       <Navbar
         currentCategory={currentCategory}
-        onSelectCategory={(cat) => {
-          setCurrentCategory(cat);
-          setSelectedMovie(null);
-        }}
+        onSelectCategory={handleSelectCategory}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         movies={movies}
         onSelectMovie={handleSelectMovie}
-        onOpenAdmin={() => setIsAdminOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
         onOpenGuide={() => setIsGuideOpen(true)}
         onOpenRequest={() => setIsRequestOpen(true)}
         siteName={siteConfig.siteName}
@@ -267,7 +355,7 @@ export default function App() {
             {/* Filter & Sorting Bar */}
             <FilterBar
               selectedCategory={currentCategory}
-              onSelectCategory={setCurrentCategory}
+              onSelectCategory={handleSelectCategory}
               selectedYear={selectedYear}
               onSelectYear={setSelectedYear}
               selectedQuality={selectedQuality}

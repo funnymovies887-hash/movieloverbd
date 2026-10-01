@@ -272,7 +272,7 @@ export async function fetchServerDatabase(): Promise<ServerDatabaseData | null> 
       const json = await res.json();
       if (json.success && json.data) {
         const data: ServerDatabaseData = json.data;
-        if (Array.isArray(data.movies) && data.movies.length > 0) {
+        if (Array.isArray(data.movies)) {
           saveStoredMovies(data.movies);
         }
         if (data.adSettings) {
