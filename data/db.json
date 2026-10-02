@@ -1,6 +1,115 @@
 {
   "movies": [
     {
+      "title": "Sardar 2 Hindi 2026",
+      "originalTitle": "Tamil",
+      "slug": "sardar-2-hindi-2026",
+      "category": "south",
+      "year": 2026,
+      "rating": 5.8,
+      "quality": [
+        "480p",
+        "720p",
+        "1080p",
+        "4K UHD"
+      ],
+      "languages": [
+        "Bengali [Original Audio]"
+      ],
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "posterUrl": "https://i.postimg.cc/TYqXGQYX/Gallery-(28)-076249f0-add4-11f1-a1ae-87a9439f8f28.jpg",
+      "backdropUrl": "https://i.postimg.cc/TYqXGQYX/Gallery-(28)-076249f0-add4-11f1-a1ae-87a9439f8f28.jpg",
+      "duration": "2h 59m",
+      "releaseDate": "2024",
+      "director": "P.S. Mithran",
+      "cast": [
+        "Karthi",
+        "SJ Suryah",
+        "Malavika Mohanan",
+        "Ashika Ranganath",
+        "Yogi Babu",
+        "Rajisha Vijayan and others."
+      ],
+      "synopsis": "Short summary of the movie...",
+      "screenshots": [
+        "https://i.postimg.cc/TYqXGQYX/Gallery-(28)-076249f0-add4-11f1-a1ae-87a9439f8f28.jpg"
+      ],
+      "downloadOptions": [
+        {
+          "quality": "480p",
+          "size": "450 MB",
+          "format": "MKV | x264 AAC",
+          "servers": [
+            {
+              "name": "Google Drive Fast Server",
+              "url": "https://www.mediafire.com/file/jjgc8ot0t3f3yii/%255BMovieBaaz.com%255D_-_Sardar_2_%25282026%2529_Dual_Audio_%255BHindi_%2526_Tamil%255D_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "gdrive"
+            },
+            {
+              "name": "HubCloud Direct Link",
+              "url": "https://www.mediafire.com/file/jjgc8ot0t3f3yii/%255BMovieBaaz.com%255D_-_Sardar_2_%25282026%2529_Dual_Audio_%255BHindi_%2526_Tamil%255D_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            }
+          ]
+        },
+        {
+          "quality": "720p",
+          "size": "1.2 GB",
+          "format": "MKV | 720p HD-Rip",
+          "servers": [
+            {
+              "name": "Google Drive Ultra HD",
+              "url": "https://www.mediafire.com/file/jjgc8ot0t3f3yii/%255BMovieBaaz.com%255D_-_Sardar_2_%25282026%2529_Dual_Audio_%255BHindi_%2526_Tamil%255D_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "gdrive"
+            },
+            {
+              "name": "Direct Cloud Mirror",
+              "url": "https://www.mediafire.com/file/jjgc8ot0t3f3yii/%255BMovieBaaz.com%255D_-_Sardar_2_%25282026%2529_Dual_Audio_%255BHindi_%2526_Tamil%255D_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            }
+          ]
+        },
+        {
+          "quality": "1080p",
+          "size": "2.8 GB",
+          "format": "MKV | 1080p Full HD ESub",
+          "servers": [
+            {
+              "name": "VIP Direct Cloud Server",
+              "url": "https://www.mediafire.com/file/jjgc8ot0t3f3yii/%255BMovieBaaz.com%255D_-_Sardar_2_%25282026%2529_Dual_Audio_%255BHindi_%2526_Tamil%255D_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            },
+            {
+              "name": "High-Speed Fast Link",
+              "url": "https://www.mediafire.com/file/jjgc8ot0t3f3yii/%255BMovieBaaz.com%255D_-_Sardar_2_%25282026%2529_Dual_Audio_%255BHindi_%2526_Tamil%255D_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "direct"
+            }
+          ]
+        },
+        {
+          "quality": "4K UHD",
+          "size": "6.5 GB",
+          "format": "MKV | 4K UHD HDR",
+          "servers": [
+            {
+              "name": "Ultra 4K Fast Server",
+              "url": "https://www.mediafire.com/file/jjgc8ot0t3f3yii/%255BMovieBaaz.com%255D_-_Sardar_2_%25282026%2529_Dual_Audio_%255BHindi_%2526_Tamil%255D_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            }
+          ]
+        }
+      ],
+      "streamUrl": "https://www.youtube.com/embed/pR1CGsbC6jw",
+      "isFeatured": false,
+      "isTrending": true,
+      "id": "movie-1790932829332",
+      "views": 5293,
+      "createdAt": "2026-10-02"
+    },
+    {
       "title": "Avengers Endgame [Encore] 2026",
       "originalTitle": "English",
       "slug": "avengers-endgame-encore-2026",
