@@ -15,11 +15,13 @@ export const INITIAL_MOVIES: Movie[] = [
       "4K UHD"
     ],
     "languages": [
-      "Bengali [Original Audio]"
+      "Hindi [Original Audio]"
     ],
     "genres": [
       "Action",
-      "Drama"
+      "Drama",
+      "Sci-Fi",
+      "Thriller"
     ],
     "posterUrl": "https://i.postimg.cc/TYqXGQYX/Gallery-(28)-076249f0-add4-11f1-a1ae-87a9439f8f28.jpg",
     "backdropUrl": "https://i.postimg.cc/TYqXGQYX/Gallery-(28)-076249f0-add4-11f1-a1ae-87a9439f8f28.jpg",
@@ -104,7 +106,7 @@ export const INITIAL_MOVIES: Movie[] = [
       }
     ],
     "streamUrl": "https://www.youtube.com/embed/pR1CGsbC6jw",
-    "isFeatured": false,
+    "isFeatured": true,
     "isTrending": true,
     "id": "movie-1790932829332",
     "views": 5293,
