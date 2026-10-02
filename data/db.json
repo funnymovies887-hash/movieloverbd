@@ -1,6 +1,111 @@
 {
   "movies": [
     {
+      "title": "Check out Bangla Natok 2026",
+      "originalTitle": "",
+      "slug": "check-out-bangla-natok-2026",
+      "category": "bengali",
+      "year": 2026,
+      "rating": 8,
+      "quality": [
+        "480p",
+        "720p",
+        "1080p",
+        "4K UHD"
+      ],
+      "languages": [
+        "Bengali [Original Audio]"
+      ],
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "posterUrl": "https://i.postimg.cc/1z4xGQ00/images-(1).jpg",
+      "backdropUrl": "https://i.postimg.cc/1z4xGQ00/images-(1).jpg",
+      "duration": "57m42s",
+      "releaseDate": "2024",
+      "director": "Director Name",
+      "cast": [
+        "Actor 1",
+        "Actor 2"
+      ],
+      "synopsis": "Short summary of the movie...",
+      "screenshots": [
+        "https://i.postimg.cc/1z4xGQ00/images-(1).jpg"
+      ],
+      "downloadOptions": [
+        {
+          "quality": "480p",
+          "size": "450 MB",
+          "format": "MKV | x264 AAC",
+          "servers": [
+            {
+              "name": "Google Drive Fast Server",
+              "url": "https://www.mediafire.com/file/dfdycryznwzel4f/%255BMovieBaaz.com%255D_-_Checkout_%25282026%2529_Bangla_Bongo_WEB-DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "gdrive"
+            },
+            {
+              "name": "HubCloud Direct Link",
+              "url": "https://www.mediafire.com/file/dfdycryznwzel4f/%255BMovieBaaz.com%255D_-_Checkout_%25282026%2529_Bangla_Bongo_WEB-DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            }
+          ]
+        },
+        {
+          "quality": "720p",
+          "size": "1.2 GB",
+          "format": "MKV | 720p HD-Rip",
+          "servers": [
+            {
+              "name": "Google Drive Ultra HD",
+              "url": "https://www.mediafire.com/file/dfdycryznwzel4f/%255BMovieBaaz.com%255D_-_Checkout_%25282026%2529_Bangla_Bongo_WEB-DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "gdrive"
+            },
+            {
+              "name": "Direct Cloud Mirror",
+              "url": "https://www.mediafire.com/file/dfdycryznwzel4f/%255BMovieBaaz.com%255D_-_Checkout_%25282026%2529_Bangla_Bongo_WEB-DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            }
+          ]
+        },
+        {
+          "quality": "1080p",
+          "size": "2.8 GB",
+          "format": "MKV | 1080p Full HD ESub",
+          "servers": [
+            {
+              "name": "VIP Direct Cloud Server",
+              "url": "https://www.mediafire.com/file/dfdycryznwzel4f/%255BMovieBaaz.com%255D_-_Checkout_%25282026%2529_Bangla_Bongo_WEB-DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            },
+            {
+              "name": "High-Speed Fast Link",
+              "url": "https://www.mediafire.com/file/dfdycryznwzel4f/%255BMovieBaaz.com%255D_-_Checkout_%25282026%2529_Bangla_Bongo_WEB-DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "direct"
+            }
+          ]
+        },
+        {
+          "quality": "4K UHD",
+          "size": "6.5 GB",
+          "format": "MKV | 4K UHD HDR",
+          "servers": [
+            {
+              "name": "Ultra 4K Fast Server",
+              "url": "https://www.mediafire.com/file/dfdycryznwzel4f/%255BMovieBaaz.com%255D_-_Checkout_%25282026%2529_Bangla_Bongo_WEB-DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+              "type": "cloud"
+            }
+          ]
+        }
+      ],
+      "streamUrl": "https://www.youtube.com/embed/Jk_rmjIlaBk",
+      "isFeatured": true,
+      "isTrending": true,
+      "id": "movie-1790935694978",
+      "views": 2597,
+      "createdAt": "2026-10-02"
+    },
+    {
       "title": "Sardar 2 Hindi 2026",
       "originalTitle": "Tamil",
       "slug": "sardar-2-hindi-2026",
