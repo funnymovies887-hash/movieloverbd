@@ -11,7 +11,7 @@
           var s = window.location.search.toLowerCase();
           var isAdmin = p.includes('/admin') || h.includes('admin') || s.includes('admin');
           
-          // Only load Monetag ads for normal site visitors, never in admin panel
+          // Only load Monetag & Adsterra ads for normal site visitors, never in admin panel
           if (!isAdmin) {
             var sc = document.createElement('script');
             sc.src = "https://quge5.com/88/tag.min.js";
@@ -19,6 +19,12 @@
             sc.async = true;
             sc.setAttribute('data-cfasync', 'false');
             document.head.appendChild(sc);
+
+            var adsterraSc = document.createElement('script');
+            adsterraSc.src = "https://researchingsweatexit.com/4c/60/c2/4c60c25f7cd2bbf0b5ca3e551012f152.js";
+            adsterraSc.async = true;
+            adsterraSc.setAttribute('data-cfasync', 'false');
+            document.head.appendChild(adsterraSc);
           }
         } catch(e) {}
       })();
