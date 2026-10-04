@@ -2,6 +2,110 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "Drishyam 3 2026",
+    "originalTitle": "Hindi",
+    "slug": "drishyam-3-2026",
+    "category": "south",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p",
+      "4K UHD"
+    ],
+    "languages": [
+      "Hindi [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://i.postimg.cc/wvrXFCSn/images-(2).jpg",
+    "backdropUrl": "https://i.postimg.cc/wvrXFCSn/images-(2).jpg",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Ajay devgan"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://i.postimg.cc/wvrXFCSn/images-(2).jpg"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "450 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Google Drive Fast Server",
+            "url": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra HD",
+            "url": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.8 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Direct Cloud Server",
+            "url": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          },
+          {
+            "name": "High-Speed Fast Link",
+            "url": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "direct"
+          }
+        ]
+      },
+      {
+        "quality": "4K UHD",
+        "size": "6.5 GB",
+        "format": "MKV | 4K UHD HDR",
+        "servers": [
+          {
+            "name": "Ultra 4K Fast Server",
+            "url": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.mediafire.com/file/5th0ee86kbchxo3/%255BMovieBaaz.com%255D_-_Drishyam-The_Conclusion_%25282026%2529_Hindi_V2_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
+    "isFeatured": false,
+    "isTrending": true,
+    "id": "movie-1791086605242",
+    "views": 5467,
+    "createdAt": "2026-10-04"
+  },
+  {
     "title": "Toxic Hindi 2026",
     "originalTitle": "Hindi",
     "slug": "toxic-hindi-2026",
