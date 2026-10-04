@@ -2,6 +2,114 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "Bachelor Point Season 5",
+    "originalTitle": "Bangla",
+    "slug": "bachelor-point-season-5",
+    "category": "webseries",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p",
+      "4K UHD"
+    ],
+    "languages": [
+      "Bengali [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://i.postimg.cc/RhCK68Lc/images.jpg",
+    "backdropUrl": "https://i.postimg.cc/RhCK68Lc/images.jpg",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Kajol Arifin Omi",
+    "cast": [
+      "Ziaul Hoque Polash",
+      "Tausif",
+      "Marzuk Russell",
+      "Chasi Alam",
+      "Shamim Hossain etc"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://i.postimg.cc/RhCK68Lc/images.jpg"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "450 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Google Drive Fast Server",
+            "url": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/view?usp=drivesdk",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/view?usp=drivesdk",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra HD",
+            "url": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/view?usp=drivesdk",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/view?usp=drivesdk",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.8 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Direct Cloud Server",
+            "url": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/view?usp=drivesdk",
+            "type": "cloud"
+          },
+          {
+            "name": "High-Speed Fast Link",
+            "url": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/view?usp=drivesdk",
+            "type": "direct"
+          }
+        ]
+      },
+      {
+        "quality": "4K UHD",
+        "size": "6.5 GB",
+        "format": "MKV | 4K UHD HDR",
+        "servers": [
+          {
+            "name": "Ultra 4K Fast Server",
+            "url": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/view?usp=drivesdk",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://drive.google.com/file/d/1ghZYKz3X01JGbxnRBL_Yl-oGI6B9DKBj/preview",
+    "isFeatured": true,
+    "isTrending": true,
+    "id": "movie-1791086213251",
+    "views": 5980,
+    "createdAt": "2026-10-04"
+  },
+  {
     "title": "Check out Bangla Natok 2026",
     "originalTitle": "",
     "slug": "check-out-bangla-natok-2026",
