@@ -2,6 +2,111 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "Partner (2023) Full Movie",
+    "originalTitle": "Hindi",
+    "slug": "partner-2023-full-movie",
+    "category": "south",
+    "year": 2023,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p",
+      "4K UHD"
+    ],
+    "languages": [
+      "Hindi [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://i.postimg.cc/gjwJmk57/Q2xc-Yq-Lg6uc-HD.jpg",
+    "backdropUrl": "https://i.postimg.cc/gjwJmk57/Q2xc-Yq-Lg6uc-HD.jpg",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Actor 1",
+      "Actor 2"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://i.postimg.cc/gjwJmk57/Q2xc-Yq-Lg6uc-HD.jpg"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "450 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Google Drive Fast Server",
+            "url": "https://youtu.be/Q2xcYqLg6uc?si=Heca8XKzfKdBTKKB",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://youtu.be/Q2xcYqLg6uc?si=Heca8XKzfKdBTKKB",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra HD",
+            "url": "https://youtu.be/Q2xcYqLg6uc?si=Heca8XKzfKdBTKKB",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://youtu.be/Q2xcYqLg6uc?si=Heca8XKzfKdBTKKB",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.8 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Direct Cloud Server",
+            "url": "https://youtu.be/Q2xcYqLg6uc?si=Heca8XKzfKdBTKKB",
+            "type": "cloud"
+          },
+          {
+            "name": "High-Speed Fast Link",
+            "url": "https://youtu.be/Q2xcYqLg6uc?si=Heca8XKzfKdBTKKB",
+            "type": "direct"
+          }
+        ]
+      },
+      {
+        "quality": "4K UHD",
+        "size": "6.5 GB",
+        "format": "MKV | 4K UHD HDR",
+        "servers": [
+          {
+            "name": "Ultra 4K Fast Server",
+            "url": "https://youtu.be/Q2xcYqLg6uc?si=Heca8XKzfKdBTKKB",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/Q2xcYqLg6uc",
+    "isFeatured": true,
+    "isTrending": true,
+    "id": "movie-1791432469984",
+    "views": 1467,
+    "createdAt": "2026-10-08"
+  },
+  {
     "title": "Partner (2007) Full Movie in 8k/4k Ultra HD",
     "originalTitle": "Hindi",
     "slug": "partner-2007-full-movie-in-8k-4k-ultra-hd",
