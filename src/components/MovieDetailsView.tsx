@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { Movie, AdSettings } from '../types';
 import { AdSlot } from './AdSlot';
-import { recordDirectLinkClick } from '../utils/storage';
+import { recordDirectLinkClick, triggerGlobalAdsterraPopunder } from '../utils/storage';
 
 interface MovieDetailsViewProps {
   movie: Movie;
@@ -60,7 +60,7 @@ function formatYouTubeEmbedUrl(url: string): string {
 
 // Download Funnel Gateway State
 interface GatewayModalData {
-  server: { name: string; url: string; type: string };
+  server: { name: string; url: string; type?: string };
   quality: string;
   size: string;
   format: string;
@@ -128,13 +128,7 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
 
   // Helper to reliably trigger Adsterra Popunder / Direct Smartlink
   const triggerAdsterraPopunder = () => {
-    recordDirectLinkClick();
-    const adUrl = adSettings.directLinkUrl || 'https://researchingsweatexit.com/aeugi8r8du?key=51f3f8392a41f9d3dc94d9925d0a44a3';
-    try {
-      window.open(adUrl, '_blank', 'noopener,noreferrer');
-    } catch (e) {
-      console.warn('Adsterra popunder trigger note:', e);
-    }
+    triggerGlobalAdsterraPopunder(adSettings.directLinkUrl);
   };
 
   // 1. Watch Online Handler
@@ -149,7 +143,7 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
   };
 
   // 2. Initial Server Button Click Handler
-  const handleInitialServerClick = (server: { name: string; url: string; type: string }, opt: any) => {
+  const handleInitialServerClick = (server: { name: string; url: string; type?: string }, opt: any) => {
     const key = `${opt.quality}-${server.name}`;
     const alreadyClickedAd = initialServerClicks[key];
 
@@ -205,14 +199,29 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
 
   // 5. Step 4 Handler: Final Real Destination File Download
   const handleFinalDownloadFile = () => {
-    if (!gateway || !gateway.server.url) return;
+    if (!gateway) return;
 
-    // Trigger destination download link
-    const targetUrl = gateway.server.url.trim();
-    if (targetUrl.startsWith('http') || targetUrl.startsWith('magnet:')) {
-      window.open(targetUrl, '_blank', 'noopener,noreferrer');
+    const rawUrl = gateway.server.url?.trim() || movie.streamUrl?.trim() || '';
+    if (!rawUrl) {
+      alert('এই সার্ভারের লিংকটি শীঘ্রই আপডেট করা হচ্ছে। অন্য সার্ভার লিংক ট্রাই করুন বা টেলিগ্রাম চ্যানেলে যুক্ত থাকুন।');
+      return;
+    }
+
+    // Trigger destination download link safely
+    if (rawUrl.startsWith('http') || rawUrl.startsWith('magnet:')) {
+      try {
+        const a = document.createElement('a');
+        a.href = rawUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch {
+        window.open(rawUrl, '_blank', 'noopener,noreferrer');
+      }
     } else {
-      window.location.href = targetUrl;
+      window.location.href = rawUrl;
     }
 
     setGateway(prev => prev ? { ...prev, downloadInitiated: true } : null);
@@ -557,7 +566,7 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
         <div className="mt-8">
           <AdSlot
             id="details-download-ad"
-            type="download-300x250"
+            type="download-banner"
             customHtml={adSettings.downloadPageBannerHtml}
             testAdsMode={adSettings.testAdsMode}
             directLinkUrl={adSettings.directLinkUrl}
@@ -819,9 +828,24 @@ export const MovieDetailsView: React.FC<MovieDetailsViewProps> = ({
                     <span>📥 Download File Now ({gateway.server.name})</span>
                   </button>
 
+                  {(gateway.server.url?.trim() || movie.streamUrl?.trim()) && (
+                    <div className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
+                      <a
+                        href={gateway.server.url?.trim() || movie.streamUrl?.trim()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                        className="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 font-bold underline cursor-pointer hover:scale-105 transition-transform"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>সরাসরি লিঙ্ক ওপেন করুন (Direct Link if download did not start)</span>
+                      </a>
+                    </div>
+                  )}
+
                   {gateway.downloadInitiated && (
                     <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs">
-                      ✅ ডাউনলোড লিংক নতুন ট্যাবে খোলা হয়েছে! ডাউনলোড শুরু না হলে ব্রাউজারের পপ-আপ সেটিংস চেক করুন।
+                      ✅ ডাউনলোড লিংক সম্পন্ন হয়েছে! নতুন উইন্ডোতে ফাইল ডাউনলোড বা স্ট্রিম শুরু হয়েছে।
                     </div>
                   )}
 

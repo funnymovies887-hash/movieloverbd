@@ -17,12 +17,12 @@ export const DEFAULT_AD_SETTINGS: AdSettings = {
   footerStickyBannerHtml: '',
   downloadPageBannerHtml: '',
   sidebarBannerHtml: '',
-  directLinkUrl: 'https://example-direct-link.adsterra.com/click-track',
-  popunderScript: '',
+  directLinkUrl: 'https://researchingsweatexit.com/aeugi8r8du?key=51f3f8392a41f9d3dc94d9925d0a44a3',
+  popunderScript: '<script src="https://researchingsweatexit.com/4c/60/c2/4c60c25f7cd2bbf0b5ca3e551012f152.js"></script>',
   impressionHeadTag: '',
   directLinkOnClickEnabled: true,
   countdownSeconds: 5,
-  antiAdblockMessage: 'Please disable AdBlock to support free movie uploads & high speed Google Drive servers!'
+  antiAdblockMessage: 'বিজ্ঞাপন আসলে তা কেটে দিয়ে পুনরায় বাটনে চাপ দিন। বিজ্ঞাপন আমাদের হাই-স্পিড গুগল ড্রাইভ ও ক্লাউড সার্ভার সচল রাখতে সাহায্য করে।'
 };
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
@@ -258,21 +258,77 @@ export interface ServerDatabaseData {
 }
 
 export const GITHUB_RAW_DB_URL = 'https://raw.githubusercontent.com/funnymovies887-hash/movieloverbd/main/data/db.json';
+export const JSDELIVR_RAW_DB_URL = 'https://cdn.jsdelivr.net/gh/funnymovies887-hash/movieloverbd@main/data/db.json';
+
+/**
+ * Safely decodes base64 string with full UTF-8 / Bengali character support
+ */
+function safeBase64DecodeUtf8(base64Str: string): string {
+  try {
+    const cleanB64 = base64Str.replace(/\s/g, '');
+    const binary = atob(cleanB64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return new TextDecoder('utf-8').decode(bytes);
+  } catch (e) {
+    try {
+      return decodeURIComponent(escape(atob(base64Str.replace(/\s/g, ''))));
+    } catch {
+      return atob(base64Str.replace(/\s/g, ''));
+    }
+  }
+}
+
+/**
+ * Universally triggers the Adsterra popunder / direct smartlink
+ * for any button (Download, Watch Online, Next Page, etc.)
+ */
+export function triggerGlobalAdsterraPopunder(customUrl?: string) {
+  try {
+    recordDirectLinkClick();
+    const settings = getStoredAdSettings();
+    const adUrl = customUrl || settings.directLinkUrl || 'https://researchingsweatexit.com/aeugi8r8du?key=51f3f8392a41f9d3dc94d9925d0a44a3';
+
+    // Dispatch background click or open popup window
+    const newWin = window.open(adUrl, '_blank', 'noopener,noreferrer');
+    if (!newWin) {
+      // Fallback for browsers with strict popup blockers
+      const link = document.createElement('a');
+      link.href = adUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  } catch (e) {
+    console.warn('Adsterra popunder trigger note:', e);
+  }
+}
 
 /**
  * Loads entire database from the server disk (/data/db.json)
- * with automatic GitHub Raw fallback for Cloudflare Workers / external domains.
+ * with automatic GitHub Raw & jsDelivr fallback for external domains.
  * Automatically updates localStorage cache so data is always synchronized across all devices.
  */
 export async function fetchServerDatabase(): Promise<ServerDatabaseData | null> {
   // Step 1: Try local backend /api/db first (if running on Node.js/Cloud Run)
   try {
-    const res = await fetch('/api/db');
-    if (res.ok) {
+    const res = await fetch(`/api/db?_t=${Date.now()}`, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
+        'Pragma': 'no-cache'
+      }
+    });
+    const contentType = res.headers.get('content-type') || '';
+    if (res.ok && contentType.includes('application/json')) {
       const json = await res.json();
       if (json.success && json.data) {
         const data: ServerDatabaseData = json.data;
-        if (Array.isArray(data.movies)) {
+        if (Array.isArray(data.movies) && data.movies.length > 0) {
           saveStoredMovies(data.movies);
         }
         if (data.adSettings) {
@@ -291,11 +347,65 @@ export async function fetchServerDatabase(): Promise<ServerDatabaseData | null> 
       }
     }
   } catch (err) {
-    // API not reachable or running on static worker (Cloudflare Workers, GitHub Pages, etc.)
+    // API not reachable or running on static host
   }
 
-  // Step 2: Global Universal Fallback - Fetch live database directly from GitHub raw!
-  // This guarantees ANY mobile device or browser opening movieloverbd.funnymovies887.workers.dev gets live data!
+  // Step 2: Live GitHub API Fallback (Zero CDN Cache - directly reads current GitHub commit with UTF-8 support)
+  try {
+    const ghApiRes = await fetch(`https://api.github.com/repos/funnymovies887-hash/movieloverbd/contents/data/db.json?ref=main&_t=${Date.now()}`, {
+      headers: { 'Accept': 'application/vnd.github+json' },
+      cache: 'no-store'
+    });
+    if (ghApiRes.ok) {
+      const ghApiData = await ghApiRes.json();
+      if (ghApiData && ghApiData.content) {
+        const decoded = safeBase64DecodeUtf8(ghApiData.content);
+        const ghData = JSON.parse(decoded);
+        if (ghData && Array.isArray(ghData.movies) && ghData.movies.length > 0) {
+          const data: ServerDatabaseData = {
+            movies: ghData.movies,
+            adSettings: ghData.adSettings,
+            siteConfig: ghData.siteConfig,
+            requests: ghData.requests || [],
+            stats: ghData.stats
+          };
+          if (data.movies) saveStoredMovies(data.movies);
+          if (data.adSettings) saveStoredAdSettings(data.adSettings);
+          if (data.siteConfig) saveStoredSiteConfig(data.siteConfig);
+          return data;
+        }
+      }
+    }
+  } catch (apiErr) {
+    // Fallthrough to CDN endpoints
+  }
+
+  // Step 3: jsDelivr Fast CDN Purge Fallback
+  try {
+    const jsdelivrRes = await fetch(`${JSDELIVR_RAW_DB_URL}?_t=${Date.now()}`, {
+      cache: 'no-store'
+    });
+    if (jsdelivrRes.ok) {
+      const jsdelivrData = await jsdelivrRes.json();
+      if (jsdelivrData && Array.isArray(jsdelivrData.movies) && jsdelivrData.movies.length > 0) {
+        const data: ServerDatabaseData = {
+          movies: jsdelivrData.movies,
+          adSettings: jsdelivrData.adSettings,
+          siteConfig: jsdelivrData.siteConfig,
+          requests: jsdelivrData.requests || [],
+          stats: jsdelivrData.stats
+        };
+        if (data.movies) saveStoredMovies(data.movies);
+        if (data.adSettings) saveStoredAdSettings(data.adSettings);
+        if (data.siteConfig) saveStoredSiteConfig(data.siteConfig);
+        return data;
+      }
+    }
+  } catch (jErr) {
+    // Fallthrough to raw endpoint
+  }
+
+  // Step 4: Global Universal Fallback - Fetch live database directly from GitHub raw!
   try {
     const cacheBuster = `?t=${Date.now()}`;
     const ghRes = await fetch(GITHUB_RAW_DB_URL + cacheBuster, {

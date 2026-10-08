@@ -5,7 +5,8 @@ import {
   getStoredSiteConfig, 
   getStoredRequests, 
   getStoredAdStats,
-  fetchServerDatabase
+  fetchServerDatabase,
+  triggerGlobalAdsterraPopunder
 } from './utils/storage';
 import { Movie, AdSettings, SiteConfig, MovieRequest } from './types';
 import { Navbar } from './components/Navbar';
@@ -19,7 +20,7 @@ import { AdminPanel } from './components/AdminPanel';
 import { MonetizationGuideModal } from './components/MonetizationGuideModal';
 import { RequestMovieModal } from './components/RequestMovieModal';
 import { Footer } from './components/Footer';
-import { Film, DollarSign, Sparkles, Send, Flame, HelpCircle } from 'lucide-react';
+import { Film, DollarSign, Sparkles, Send, Flame, HelpCircle, ChevronLeft, ChevronRight, ArrowLeft, ArrowRight } from 'lucide-react';
 
 // Helper to parse URL into application route state
 function parseCurrentUrl(allMovies: Movie[]) {
@@ -71,6 +72,10 @@ function parseCurrentUrl(allMovies: Movie[]) {
     category = decodeURIComponent(queryCat);
   }
 
+  // 4. Page number (?page=2, ?p=2)
+  const queryPage = searchParams.get('page') || searchParams.get('p');
+  const page = queryPage ? Math.max(1, parseInt(queryPage, 10) || 1) : 1;
+
   let matchedMovie: Movie | null = null;
   if (movieSlug && Array.isArray(allMovies)) {
     matchedMovie = allMovies.find(m => m.slug === movieSlug || m.id === movieSlug) || null;
@@ -80,7 +85,8 @@ function parseCurrentUrl(allMovies: Movie[]) {
     isAdmin,
     movieSlug,
     matchedMovie,
-    category
+    category,
+    page
   };
 }
 
@@ -93,7 +99,11 @@ export default function App() {
   // Parse initial route from URL synchronously on first render so refresh never loses position
   const initialRoute = React.useMemo(() => parseCurrentUrl(getStoredMovies()), []);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(() => initialRoute.matchedMovie);
+  const [pendingMovieSlug, setPendingMovieSlug] = useState<string | null>(() => 
+    !initialRoute.matchedMovie && initialRoute.movieSlug ? initialRoute.movieSlug : null
+  );
   const [currentCategory, setCurrentCategory] = useState<string>(() => initialRoute.category);
+  const [currentPage, setCurrentPage] = useState<number>(() => initialRoute.page || 1);
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(() => initialRoute.isAdmin);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -131,6 +141,13 @@ export default function App() {
         const route = parseCurrentUrl(serverData.movies);
         if (route.matchedMovie) {
           setSelectedMovie(route.matchedMovie);
+          setPendingMovieSlug(null);
+        } else if (pendingMovieSlug) {
+          const match = serverData.movies.find(m => m.slug === pendingMovieSlug || m.id === pendingMovieSlug);
+          if (match) {
+            setSelectedMovie(match);
+            setPendingMovieSlug(null);
+          }
         }
       }
       if (serverData.adSettings) {
@@ -147,7 +164,45 @@ export default function App() {
     return () => {
       isMounted = false;
     };
+  }, [pendingMovieSlug]);
+
+  // Live auto-synchronization: ensures any update made on admin phone appears on all visitor devices automatically
+  useEffect(() => {
+    const doSync = () => {
+      fetchServerDatabase().then((serverData) => {
+        if (!serverData) return;
+        if (Array.isArray(serverData.movies) && serverData.movies.length > 0) {
+          setMovies(serverData.movies);
+        }
+        if (serverData.adSettings) setAdSettings(serverData.adSettings);
+        if (serverData.siteConfig) setSiteConfig(serverData.siteConfig);
+        if (Array.isArray(serverData.requests)) setRequests(serverData.requests);
+      });
+    };
+
+    // Poll every 15 seconds
+    const interval = setInterval(doSync, 15000);
+
+    // Also sync immediately whenever user switches to tab / window focus
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        doSync();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('focus', doSync);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('focus', doSync);
+    };
   }, []);
+
+  // Reset pagination to page 1 whenever search, category, or filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [currentCategory, searchQuery, selectedYear, selectedQuality, selectedGenre, sortBy]);
 
   // Listen to browser Back/Forward navigation & URL changes
   useEffect(() => {
@@ -156,13 +211,20 @@ export default function App() {
       setIsAdminOpen(route.isAdmin);
       if (route.matchedMovie) {
         setSelectedMovie(route.matchedMovie);
+        setPendingMovieSlug(null);
         document.title = `${route.matchedMovie.title} - ${siteConfig.siteName}`;
       } else if (!route.movieSlug) {
         setSelectedMovie(null);
+        setPendingMovieSlug(null);
         document.title = `${siteConfig.siteName} - ${siteConfig.tagline}`;
+      } else {
+        setPendingMovieSlug(route.movieSlug);
       }
       if (route.category) {
         setCurrentCategory(route.category);
+      }
+      if (route.page) {
+        setCurrentPage(route.page);
       }
     };
 
@@ -259,10 +321,45 @@ export default function App() {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
+  // 20 Movies Per Page Pagination
+  const MOVIES_PER_PAGE = 20;
+  const totalPages = Math.max(1, Math.ceil(sortedMovies.length / MOVIES_PER_PAGE));
+  const activePage = Math.min(Math.max(1, currentPage), totalPages);
+  const paginatedMovies = sortedMovies.slice((activePage - 1) * MOVIES_PER_PAGE, activePage * MOVIES_PER_PAGE);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages || newPage === activePage) return;
+
+    // Trigger popunder ad on pagination click as requested
+    triggerGlobalAdsterraPopunder(adSettings.directLinkUrl);
+
+    setCurrentPage(newPage);
+
+    // Update URL query parameter ?page=
+    const params = new URLSearchParams(window.location.search);
+    if (newPage > 1) {
+      params.set('page', newPage.toString());
+    } else {
+      params.delete('page');
+    }
+    const queryPart = params.toString() ? `?${params.toString()}` : '';
+    const newUrl = `${window.location.pathname}${queryPart}${window.location.hash}`;
+    window.history.pushState({ page: newPage }, '', newUrl);
+
+    // Smooth scroll to top of movie grid
+    const el = document.getElementById('movie-list-heading');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    }
+  };
+
   const featuredMovies = movies.filter((m) => m.isFeatured || m.isTrending).slice(0, 5);
 
   const handleSelectMovie = (movie: Movie) => {
     setSelectedMovie(movie);
+    setPendingMovieSlug(null);
     const targetPath = `/movie/${movie.slug}`;
     if (window.location.pathname !== targetPath) {
       window.history.pushState({ type: 'movie', slug: movie.slug }, '', targetPath);
@@ -273,6 +370,7 @@ export default function App() {
 
   const handleBackToHome = () => {
     setSelectedMovie(null);
+    setPendingMovieSlug(null);
     const targetPath = currentCategory && currentCategory !== 'all' ? `/category/${currentCategory}` : '/';
     if (window.location.pathname !== targetPath) {
       window.history.pushState(null, '', targetPath);
@@ -284,6 +382,8 @@ export default function App() {
   const handleSelectCategory = (cat: string) => {
     setCurrentCategory(cat);
     setSelectedMovie(null);
+    setPendingMovieSlug(null);
+    setCurrentPage(1);
     const targetPath = cat !== 'all' ? `/category/${cat}` : '/';
     if (window.location.pathname !== targetPath) {
       window.history.pushState({ type: 'category', category: cat }, '', targetPath);
@@ -321,7 +421,14 @@ export default function App() {
 
       {/* Main View Area */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
-        {selectedMovie ? (
+        {pendingMovieSlug && !selectedMovie ? (
+          /* Movie Loading Skeleton on refresh / direct deep-link */
+          <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-12 text-center max-w-md mx-auto my-12 animate-fadeIn shadow-2xl">
+            <div className="w-14 h-14 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <h3 className="text-base font-bold text-white">মুভির তথ্য লোড হচ্ছে...</h3>
+            <p className="text-xs text-slate-400 mt-1">দয়া করে এক মুহূর্ত অপেক্ষা করুন, সার্ভার ডাটাবেজ থেকে মুভি লোড হচ্ছে।</p>
+          </div>
+        ) : selectedMovie ? (
           /* Movie Details & Download Links View */
           <MovieDetailsView
             movie={selectedMovie}
@@ -368,7 +475,7 @@ export default function App() {
             />
 
             {/* Category Title Section */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div id="movie-list-heading" className="flex items-center justify-between border-b border-slate-800 pb-3 scroll-mt-20">
               <div className="flex items-center gap-2">
                 <Flame className="w-5 h-5 text-red-500" />
                 <h1 className="text-lg sm:text-xl font-black text-white capitalize">
@@ -379,7 +486,7 @@ export default function App() {
               </div>
 
               <div className="text-xs text-slate-400">
-                Showing <strong className="text-white">{sortedMovies.length}</strong> titles
+                Showing <strong className="text-white">{sortedMovies.length === 0 ? 0 : `${(activePage - 1) * MOVIES_PER_PAGE + 1}-${Math.min(activePage * MOVIES_PER_PAGE, sortedMovies.length)}`}</strong> of <strong className="text-white">{sortedMovies.length}</strong> titles
               </div>
             </div>
 
@@ -413,15 +520,85 @@ export default function App() {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
-                {sortedMovies.map((movie) => (
-                  <MovieCard
-                    key={movie.id}
-                    movie={movie}
-                    onSelect={handleSelectMovie}
-                  />
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+                  {paginatedMovies.map((movie) => (
+                    <MovieCard
+                      key={movie.id}
+                      movie={movie}
+                      onSelect={handleSelectMovie}
+                    />
+                  ))}
+                </div>
+
+                {/* 20 Movies Sequential Pagination Bar */}
+                {totalPages > 1 && (
+                  <div className="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    {/* Page info badge */}
+                    <div className="text-xs text-slate-400 font-medium order-2 sm:order-1 text-center sm:text-left">
+                      পেজ <strong className="text-white font-bold">{activePage}</strong> এর <strong className="text-white font-bold">{totalPages}</strong> (মোট <span className="text-red-400 font-bold">{sortedMovies.length}</span> টি মুভি • প্রতি পেজে ২০ টি)
+                    </div>
+
+                    {/* Pagination Button Controls */}
+                    <div className="flex items-center gap-1.5 sm:gap-2 order-1 sm:order-2 flex-wrap justify-center">
+                      {/* Previous Page Button */}
+                      <button
+                        onClick={() => handlePageChange(activePage - 1)}
+                        disabled={activePage <= 1}
+                        className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                          activePage <= 1
+                            ? 'bg-slate-900 text-slate-600 border border-slate-800/60 cursor-not-allowed opacity-50'
+                            : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-red-500 shadow-md active:scale-95'
+                        }`}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                        <span>পূর্ববর্তী পেজ (Prev)</span>
+                      </button>
+
+                      {/* Numbered Pills */}
+                      {Array.from({ length: totalPages }, (_, i) => i + 1)
+                        .filter(p => {
+                          if (totalPages <= 7) return true;
+                          return p === 1 || p === totalPages || Math.abs(p - activePage) <= 1;
+                        })
+                        .map((p, idx, arr) => {
+                          const prev = arr[idx - 1];
+                          const hasGap = prev && p - prev > 1;
+
+                          return (
+                            <React.Fragment key={p}>
+                              {hasGap && <span className="px-1 text-slate-600 font-bold text-xs">...</span>}
+                              <button
+                                onClick={() => handlePageChange(p)}
+                                className={`w-9 h-9 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer ${
+                                  p === activePage
+                                    ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white font-extrabold shadow-lg shadow-red-600/30 scale-105 ring-2 ring-red-400'
+                                    : 'bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 hover:border-slate-500'
+                                }`}
+                              >
+                                {p}
+                              </button>
+                            </React.Fragment>
+                          );
+                        })}
+
+                      {/* Next Page Button */}
+                      <button
+                        onClick={() => handlePageChange(activePage + 1)}
+                        disabled={activePage >= totalPages}
+                        className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                          activePage >= totalPages
+                            ? 'bg-slate-900 text-slate-600 border border-slate-800/60 cursor-not-allowed opacity-50'
+                            : 'bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 text-white border border-red-500/50 shadow-md shadow-red-600/20 active:scale-95'
+                        }`}
+                      >
+                        <span>পরবর্তী পেজ (Next)</span>
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
 
             {/* Bottom In-Feed Sponsor Ad */}

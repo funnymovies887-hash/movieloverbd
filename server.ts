@@ -13,11 +13,15 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
-// Universal CORS & Preflight handler for API routes
+// Universal CORS, Anti-Cache & Preflight handler for API routes
 app.use('/api', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+  res.header('Pragma', 'no-cache');
+  res.header('Expires', '0');
+  res.header('Surrogate-Control', 'no-store');
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -332,8 +336,12 @@ async function performUniversalSync(reason: string) {
 
 // 1. Get entire database
 app.get('/api/db', (_req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  res.setHeader('Surrogate-Control', 'no-store');
   const db = readDb();
-  res.json({ success: true, data: db });
+  res.json({ success: true, data: db, timestamp: Date.now() });
 });
 
 // 2. Health check
