@@ -2,6 +2,112 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "Partner (2007) Full Movie in 8k/4k Ultra HD",
+    "originalTitle": "Hindi",
+    "slug": "partner-2007-full-movie-in-8k-4k-ultra-hd",
+    "category": "bollywood",
+    "year": 2007,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p",
+      "4K UHD"
+    ],
+    "languages": [
+      "Hindi [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://i.postimg.cc/XJ5jzDCY/WPYPg-HMO-O0-HD.jpg",
+    "backdropUrl": "https://i.postimg.cc/XJ5jzDCY/WPYPg-HMO-O0-HD.jpg",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Salman Khan",
+      "Govinda",
+      "Katrina Kaif"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://i.postimg.cc/XJ5jzDCY/WPYPg-HMO-O0-HD.jpg"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "450 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Google Drive Fast Server",
+            "url": "https://youtu.be/WPYPgHMO_O0?si=tl_H421YFay0l5vP",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://youtu.be/WPYPgHMO_O0?si=tl_H421YFay0l5vP",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra HD",
+            "url": "https://youtu.be/WPYPgHMO_O0?si=tl_H421YFay0l5vP",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://youtu.be/WPYPgHMO_O0?si=tl_H421YFay0l5vP",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.8 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Direct Cloud Server",
+            "url": "https://youtu.be/WPYPgHMO_O0?si=tl_H421YFay0l5vP",
+            "type": "cloud"
+          },
+          {
+            "name": "High-Speed Fast Link",
+            "url": "https://youtu.be/WPYPgHMO_O0?si=tl_H421YFay0l5vP",
+            "type": "direct"
+          }
+        ]
+      },
+      {
+        "quality": "4K UHD",
+        "size": "6.5 GB",
+        "format": "MKV | 4K UHD HDR",
+        "servers": [
+          {
+            "name": "Ultra 4K Fast Server",
+            "url": "https://youtu.be/WPYPgHMO_O0?si=tl_H421YFay0l5vP",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/WPYPgHMO_O0",
+    "isFeatured": true,
+    "isTrending": true,
+    "id": "movie-1791432121302",
+    "views": 6027,
+    "createdAt": "2026-10-08"
+  },
+  {
     "title": "Raavan Hindi 2026",
     "originalTitle": "Bangla",
     "slug": "raavan-hindi-2026",
