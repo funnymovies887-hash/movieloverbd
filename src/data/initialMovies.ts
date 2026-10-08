@@ -2,6 +2,111 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "Happily Married 2026",
+    "originalTitle": "Bangla",
+    "slug": "happily-married-2026",
+    "category": "webseries",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p",
+      "4K UHD"
+    ],
+    "languages": [
+      "Bengali [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://i.postimg.cc/Wb2f4W7r/posters-cb3c2d5a61acb1048c5994f64d30e40f-goplay-800x120002.jpg",
+    "backdropUrl": "https://i.postimg.cc/Wb2f4W7r/posters-cb3c2d5a61acb1048c5994f64d30e40f-goplay-800x120002.jpg",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Apurbo",
+      "Keya Payel"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://i.postimg.cc/Wb2f4W7r/posters-cb3c2d5a61acb1048c5994f64d30e40f-goplay-800x120002.jpg"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "450 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Google Drive Fast Server",
+            "url": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra HD",
+            "url": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.8 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Direct Cloud Server",
+            "url": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          },
+          {
+            "name": "High-Speed Fast Link",
+            "url": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "direct"
+          }
+        ]
+      },
+      {
+        "quality": "4K UHD",
+        "size": "6.5 GB",
+        "format": "MKV | 4K UHD HDR",
+        "servers": [
+          {
+            "name": "Ultra 4K Fast Server",
+            "url": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.mediafire.com/file/7ir53xzww2a9uc7/%255BMovieBaaz.com%255D_-_Happily_Married_%25282026%2529_Bangla_Chorki_WEB_DL_1080p_-_%255BCineBari.com%255D.mkv/file",
+    "isFeatured": true,
+    "isTrending": true,
+    "id": "movie-1791434114172",
+    "views": 6059,
+    "createdAt": "2026-10-08"
+  },
+  {
     "title": "Mandaadi Full Movie (2026)",
     "originalTitle": "Hindi",
     "slug": "mandaadi-full-movie-2026-",
