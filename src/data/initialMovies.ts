@@ -2,6 +2,111 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "Vikrant Rona Full Movie 2026",
+    "originalTitle": "Hindi",
+    "slug": "vikrant-rona-full-movie-2026",
+    "category": "south",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p",
+      "4K UHD"
+    ],
+    "languages": [
+      "Hindi [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://i.postimg.cc/3xByknjK/Kq5s7Zcva-Ao-HD.jpg",
+    "backdropUrl": "https://i.postimg.cc/3xByknjK/Kq5s7Zcva-Ao-HD.jpg",
+    "duration": "2h 15m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Sudeep",
+      "Jacqueline"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://i.postimg.cc/3xByknjK/Kq5s7Zcva-Ao-HD.jpg"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "450 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Google Drive Fast Server",
+            "url": "https://youtu.be/Kq5s7ZcvaAo?si=XwY_PhaHlc7ZEVY6",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://youtu.be/Kq5s7ZcvaAo?si=XwY_PhaHlc7ZEVY6",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra HD",
+            "url": "https://youtu.be/Kq5s7ZcvaAo?si=XwY_PhaHlc7ZEVY6",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://youtu.be/Kq5s7ZcvaAo?si=XwY_PhaHlc7ZEVY6",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.8 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Direct Cloud Server",
+            "url": "https://youtu.be/Kq5s7ZcvaAo?si=XwY_PhaHlc7ZEVY6",
+            "type": "cloud"
+          },
+          {
+            "name": "High-Speed Fast Link",
+            "url": "https://youtu.be/Kq5s7ZcvaAo?si=XwY_PhaHlc7ZEVY6",
+            "type": "direct"
+          }
+        ]
+      },
+      {
+        "quality": "4K UHD",
+        "size": "6.5 GB",
+        "format": "MKV | 4K UHD HDR",
+        "servers": [
+          {
+            "name": "Ultra 4K Fast Server",
+            "url": "https://youtu.be/Kq5s7ZcvaAo?si=XwY_PhaHlc7ZEVY6",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/Kq5s7ZcvaAo",
+    "isFeatured": true,
+    "isTrending": true,
+    "id": "movie-1791554352585",
+    "views": 3340,
+    "createdAt": "2026-10-09"
+  },
+  {
     "title": "Khalifa Full Movie 2026",
     "originalTitle": "Hindi",
     "slug": "khalifa-full-movie-2026",
