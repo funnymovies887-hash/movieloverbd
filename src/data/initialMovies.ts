@@ -2,9 +2,9 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
-    "title": "Jailer 2 Full Movie 2026",
+    "title": "Jail 3",
     "originalTitle": "",
-    "slug": "jailer-2-full-movie-2026",
+    "slug": "jail-3",
     "category": "south",
     "year": 2026,
     "rating": 8,
@@ -102,8 +102,8 @@ export const INITIAL_MOVIES: Movie[] = [
     "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
     "isFeatured": true,
     "isTrending": true,
-    "id": "movie-1792165308893",
-    "views": 5032,
+    "id": "movie-1792165407230",
+    "views": 5468,
     "createdAt": "2026-10-16"
   },
   {
