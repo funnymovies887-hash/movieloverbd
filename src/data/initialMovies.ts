@@ -2,10 +2,10 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
-    "title": "Rajnikanth 3",
+    "title": "Jailer 2 Full Movie 2026",
     "originalTitle": "",
-    "slug": "rajnikanth-3",
-    "category": "bengali",
+    "slug": "jailer-2-full-movie-2026",
+    "category": "south",
     "year": 2026,
     "rating": 8,
     "quality": [
@@ -15,14 +15,14 @@ export const INITIAL_MOVIES: Movie[] = [
       "4K UHD"
     ],
     "languages": [
-      "Bengali [Original Audio]"
+      "Hindi [Original Audio]"
     ],
     "genres": [
       "Action",
       "Drama"
     ],
-    "posterUrl": "https://i.postimg.cc/sXqWLvdf/images-(22).jpg",
-    "backdropUrl": "https://i.postimg.cc/sXqWLvdf/images-(22).jpg",
+    "posterUrl": "https://i.postimg.cc/mrDfXrSs/jailer-2-will-probably-be-a-mid-film-this-year-v0-8njue767fubg1.jpg",
+    "backdropUrl": "https://i.postimg.cc/mrDfXrSs/jailer-2-will-probably-be-a-mid-film-this-year-v0-8njue767fubg1.jpg",
     "duration": "2h 15m",
     "releaseDate": "2024",
     "director": "Director Name",
@@ -32,7 +32,7 @@ export const INITIAL_MOVIES: Movie[] = [
     ],
     "synopsis": "Short summary of the movie...",
     "screenshots": [
-      "https://i.postimg.cc/sXqWLvdf/images-(22).jpg"
+      "https://i.postimg.cc/mrDfXrSs/jailer-2-will-probably-be-a-mid-film-this-year-v0-8njue767fubg1.jpg"
     ],
     "downloadOptions": [
       {
@@ -102,8 +102,8 @@ export const INITIAL_MOVIES: Movie[] = [
     "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
     "isFeatured": true,
     "isTrending": true,
-    "id": "movie-1792165102725",
-    "views": 1375,
+    "id": "movie-1792165308893",
+    "views": 5032,
     "createdAt": "2026-10-16"
   },
   {
