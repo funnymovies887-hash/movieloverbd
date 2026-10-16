@@ -2,6 +2,111 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
+    "title": "Jailer 2 Full Movie 2026",
+    "originalTitle": "Tamil",
+    "slug": "jailer-2-full-movie-2026",
+    "category": "south",
+    "year": 2026,
+    "rating": 8,
+    "quality": [
+      "480p",
+      "720p",
+      "1080p",
+      "4K UHD"
+    ],
+    "languages": [
+      "Hindi [Original Audio]"
+    ],
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "posterUrl": "https://i.postimg.cc/sXqWLvdf/images-(22).jpg",
+    "backdropUrl": "https://i.postimg.cc/sXqWLvdf/images-(22).jpg",
+    "duration": "2h 45m",
+    "releaseDate": "2024",
+    "director": "Director Name",
+    "cast": [
+      "Actor 1",
+      "Actor 2"
+    ],
+    "synopsis": "Short summary of the movie...",
+    "screenshots": [
+      "https://i.postimg.cc/sXqWLvdf/images-(22).jpg"
+    ],
+    "downloadOptions": [
+      {
+        "quality": "480p",
+        "size": "450 MB",
+        "format": "MKV | x264 AAC",
+        "servers": [
+          {
+            "name": "Google Drive Fast Server",
+            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "type": "gdrive"
+          },
+          {
+            "name": "HubCloud Direct Link",
+            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "720p",
+        "size": "1.2 GB",
+        "format": "MKV | 720p HD-Rip",
+        "servers": [
+          {
+            "name": "Google Drive Ultra HD",
+            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "type": "gdrive"
+          },
+          {
+            "name": "Direct Cloud Mirror",
+            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "type": "cloud"
+          }
+        ]
+      },
+      {
+        "quality": "1080p",
+        "size": "2.8 GB",
+        "format": "MKV | 1080p Full HD ESub",
+        "servers": [
+          {
+            "name": "VIP Direct Cloud Server",
+            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "type": "cloud"
+          },
+          {
+            "name": "High-Speed Fast Link",
+            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "type": "direct"
+          }
+        ]
+      },
+      {
+        "quality": "4K UHD",
+        "size": "6.5 GB",
+        "format": "MKV | 4K UHD HDR",
+        "servers": [
+          {
+            "name": "Ultra 4K Fast Server",
+            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "type": "cloud"
+          }
+        ]
+      }
+    ],
+    "streamUrl": "https://www.youtube.com/embed/NugO8FZzRtE",
+    "isFeatured": true,
+    "isTrending": true,
+    "id": "movie-1792164970879",
+    "views": 4159,
+    "createdAt": "2026-10-16"
+  },
+  {
     "title": "Jailer Full Movie 2026",
     "originalTitle": "Tamil",
     "slug": "jailer-full-movie-2026",
