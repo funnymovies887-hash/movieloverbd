@@ -2,10 +2,10 @@ import { Movie } from '../types';
 
 export const INITIAL_MOVIES: Movie[] = [
   {
-    "title": "Jailer 2 Full Movie 2026",
-    "originalTitle": "Tamil",
-    "slug": "jailer-2-full-movie-2026",
-    "category": "south",
+    "title": "Rajnikanth 3",
+    "originalTitle": "",
+    "slug": "rajnikanth-3",
+    "category": "bengali",
     "year": 2026,
     "rating": 8,
     "quality": [
@@ -15,7 +15,7 @@ export const INITIAL_MOVIES: Movie[] = [
       "4K UHD"
     ],
     "languages": [
-      "Hindi [Original Audio]"
+      "Bengali [Original Audio]"
     ],
     "genres": [
       "Action",
@@ -23,7 +23,7 @@ export const INITIAL_MOVIES: Movie[] = [
     ],
     "posterUrl": "https://i.postimg.cc/sXqWLvdf/images-(22).jpg",
     "backdropUrl": "https://i.postimg.cc/sXqWLvdf/images-(22).jpg",
-    "duration": "2h 45m",
+    "duration": "2h 15m",
     "releaseDate": "2024",
     "director": "Director Name",
     "cast": [
@@ -41,13 +41,13 @@ export const INITIAL_MOVIES: Movie[] = [
         "format": "MKV | x264 AAC",
         "servers": [
           {
-            "name": "Google Drive Fast Server",
-            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "name": "Fast G-Drive Server",
+            "url": "",
             "type": "gdrive"
           },
           {
             "name": "HubCloud Direct Link",
-            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "url": "",
             "type": "cloud"
           }
         ]
@@ -58,13 +58,13 @@ export const INITIAL_MOVIES: Movie[] = [
         "format": "MKV | 720p HD-Rip",
         "servers": [
           {
-            "name": "Google Drive Ultra HD",
-            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "name": "Google Drive Ultra",
+            "url": "",
             "type": "gdrive"
           },
           {
             "name": "Direct Cloud Mirror",
-            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "url": "",
             "type": "cloud"
           }
         ]
@@ -75,13 +75,13 @@ export const INITIAL_MOVIES: Movie[] = [
         "format": "MKV | 1080p Full HD ESub",
         "servers": [
           {
-            "name": "VIP Direct Cloud Server",
-            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "name": "VIP Cloud Server",
+            "url": "",
             "type": "cloud"
           },
           {
-            "name": "High-Speed Fast Link",
-            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "name": "Direct High-Speed Link",
+            "url": "",
             "type": "direct"
           }
         ]
@@ -93,17 +93,17 @@ export const INITIAL_MOVIES: Movie[] = [
         "servers": [
           {
             "name": "Ultra 4K Fast Server",
-            "url": "https://youtu.be/NugO8FZzRtE?si=Advxpv_JHzINCjxo",
+            "url": "",
             "type": "cloud"
           }
         ]
       }
     ],
-    "streamUrl": "https://www.youtube.com/embed/NugO8FZzRtE",
+    "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
     "isFeatured": true,
     "isTrending": true,
-    "id": "movie-1792164970879",
-    "views": 4159,
+    "id": "movie-1792165102725",
+    "views": 1375,
     "createdAt": "2026-10-16"
   },
   {
