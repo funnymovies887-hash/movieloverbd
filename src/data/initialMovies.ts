@@ -107,8 +107,8 @@ export const INITIAL_MOVIES: Movie[] = [
     "createdAt": "2026-10-21"
   },
   {
-    "title": "Jail 3",
-    "originalTitle": "",
+    "title": "Jailer 2 Full Movie 2026",
+    "originalTitle": "Tamil",
     "slug": "jail-3",
     "category": "south",
     "year": 2026,
@@ -146,13 +146,13 @@ export const INITIAL_MOVIES: Movie[] = [
         "format": "MKV | x264 AAC",
         "servers": [
           {
-            "name": "Fast G-Drive Server",
-            "url": "",
+            "name": "Google Drive Fast Server",
+            "url": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
             "type": "gdrive"
           },
           {
             "name": "HubCloud Direct Link",
-            "url": "",
+            "url": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
             "type": "cloud"
           }
         ]
@@ -163,13 +163,13 @@ export const INITIAL_MOVIES: Movie[] = [
         "format": "MKV | 720p HD-Rip",
         "servers": [
           {
-            "name": "Google Drive Ultra",
-            "url": "",
+            "name": "Google Drive Ultra HD",
+            "url": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
             "type": "gdrive"
           },
           {
             "name": "Direct Cloud Mirror",
-            "url": "",
+            "url": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
             "type": "cloud"
           }
         ]
@@ -180,13 +180,13 @@ export const INITIAL_MOVIES: Movie[] = [
         "format": "MKV | 1080p Full HD ESub",
         "servers": [
           {
-            "name": "VIP Cloud Server",
-            "url": "",
+            "name": "VIP Direct Cloud Server",
+            "url": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
             "type": "cloud"
           },
           {
-            "name": "Direct High-Speed Link",
-            "url": "",
+            "name": "High-Speed Fast Link",
+            "url": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
             "type": "direct"
           }
         ]
@@ -198,13 +198,13 @@ export const INITIAL_MOVIES: Movie[] = [
         "servers": [
           {
             "name": "Ultra 4K Fast Server",
-            "url": "",
+            "url": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
             "type": "cloud"
           }
         ]
       }
     ],
-    "streamUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "streamUrl": "https://www.mediafire.com/file/2i973z7rhqhb04x/%255BMovieBaaz.com%255D_-_Jailer_2_%25282026%2529_Hindi_HDTC_1080p_-_%255BCineBari.com%255D.mkv/file",
     "isFeatured": true,
     "isTrending": true,
     "id": "movie-1792165407230",
